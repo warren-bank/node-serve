@@ -1,0 +1,21 @@
+{
+  "name": "@warren-bank/serve",
+  "version": "13.0.2",
+  "description": "Static file serving and directory listing",
+  "author": "Warren Bank (https://github.com/warren-bank)",
+  "license": "GPL-2.0",
+  "scripts": {
+    "postinstall": "npm install ./lib/serve-handler && npm install ./lib/serve"
+  },
+  "bin": {
+    "serve": "./lib/serve/bin/serve.js"
+  },
+  "dependencies": {
+    "serve-handler": "file:./lib/serve-handler",
+    "serve":         "file:./lib/serve"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/warren-bank/node-serve"
+  }
+}
