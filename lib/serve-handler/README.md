@@ -168,6 +168,16 @@ In the example above, `/old-docs/12` would be forwarded to `/new-docs/12` with s
 
 **NOTE:** The paths can contain globs (matched using [minimatch](https://github.com/isaacs/minimatch)) or regular expressions (match using [path-to-regexp](https://github.com/pillarjs/path-to-regexp)).
 
+By default, the querystring and hash are not preserved by the redirect. The following boolean attributes enable this behavior:
+
+```json
+{
+  "redirects": [
+    { "source": "/from", "destination": "/to", "preserveQuery": true, "preserveHash": true }
+  ]
+}
+```
+
 ### headers (Array)
 
 Allows you to set custom headers (and overwrite the default ones) for certain paths:
