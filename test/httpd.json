@@ -1,6 +1,8 @@
 {
   "cleanUrls":    false,
   "renderSingle": false,
+  "etag":         false,
+  "symlinks":     true,
 
   "headers": [{
     "source": "**",

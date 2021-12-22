@@ -14,10 +14,17 @@ Static file serving and directory listing
       - a Windows shortcut to a file will retrieve its contents
       - a Windows shortcut to a directory will list its contents
         * nesting multiple Windows directory shortcuts works as expected
+* [schemas](https://github.com/vercel/schemas)
+  - forked from tag: [2.19.0](https://github.com/vercel/schemas/releases/tag/2.19.0)
+  - files:
+    * [config-static.js](https://github.com/vercel/schemas/blob/2.19.0/deployment/config-static.js)
+  - changes:
+    * add: (boolean) `symlinks`
+    * add: (boolean) `etag`
 * [serve](https://github.com/vercel/serve)
   - forked from tag: [13.0.2](https://github.com/vercel/serve/releases/tag/13.0.2)
   - changes:
-    * update the `serve-handler` dependency to use this modified version
+    * update the `serve-handler` and `schemas` dependencies to use the modified versions (above)
 
 #### Install:
 

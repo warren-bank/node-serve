@@ -15,14 +15,15 @@
     "serve": "./bin/serve.js"
   },
   "dependencies": {
-    "@zeit/schemas": "2.6.0",
+    "serve-handler": "file:../serve-handler",
+    "schemas":       "file:../schemas",
+
     "ajv": "6.12.6",
     "arg": "2.0.0",
     "boxen": "5.1.2",
     "chalk": "2.4.1",
     "clipboardy": "2.3.0",
     "compression": "1.7.3",
-    "serve-handler": "file:../serve-handler",
     "update-check": "1.5.2"
   }
 }

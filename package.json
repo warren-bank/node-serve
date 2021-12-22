@@ -12,6 +12,7 @@
   },
   "dependencies": {
     "serve-handler": "file:./lib/serve-handler",
+    "schemas":       "file:./lib/schemas",
     "serve":         "file:./lib/serve"
   },
   "repository": {
