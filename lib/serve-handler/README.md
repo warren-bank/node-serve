@@ -59,6 +59,7 @@ You can use any of the following options:
 | [`renderSingle`](#rendersingle-boolean)              | If a directory only contains one file, render it                      |
 | [`symlinks`](#symlinks-boolean)                      | Resolve symlinks instead of rendering a 404 error                     |
 | [`etag`](#etag-boolean)                              | Calculate a strong `ETag` response header, instead of `Last-Modified` |
+| [`auth`](#auth-object)                               | Restrict access using basic auth                                      |
 
 ### public (String)
 
@@ -293,6 +294,19 @@ Sending an `ETag` header is disabled by default and can be enabled like this:
 ```js
 {
   "etag": true
+}
+```
+
+### auth (Object)
+
+Restrict access to visitors using basic auth, which presents a username/password challenge prompt.
+
+The required username/password combination can be configured like this:
+
+```js
+"auth": {
+  "name": "required_username",
+  "pass": "required_password"
 }
 ```
 

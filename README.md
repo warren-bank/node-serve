@@ -21,6 +21,10 @@ Static file serving and directory listing
   - changes:
     * add: (boolean) `symlinks`
     * add: (boolean) `etag`
+    * add: (object)  `auth`
+      - attributes:
+        * (string) `name`
+        * (string) `pass`
 * [serve](https://github.com/vercel/serve)
   - forked from tag: [13.0.2](https://github.com/vercel/serve/releases/tag/13.0.2)
   - changes:
