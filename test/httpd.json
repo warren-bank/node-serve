@@ -1,7 +1,7 @@
 {
   "cleanUrls":    false,
   "renderSingle": false,
-  "etag":         false,
+  "etag":         true,
   "symlinks":     true,
 
   "headers": [{
