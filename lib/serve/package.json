@@ -18,12 +18,12 @@
     "serve-handler": "file:../serve-handler",
     "schemas":       "file:../schemas",
 
-    "ajv": "6.12.6",
-    "arg": "2.0.0",
+    "ajv": "8.8.2",
+    "arg": "5.0.1",
     "boxen": "5.1.2",
-    "chalk": "2.4.1",
+    "chalk": "5.0.0",
     "clipboardy": "2.3.0",
-    "compression": "1.7.3",
-    "update-check": "1.5.2"
+    "compression": "1.7.4",
+    "update-check": "1.5.4"
   }
 }
