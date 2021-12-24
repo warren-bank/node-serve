@@ -3,6 +3,8 @@
   "renderSingle": false,
   "etag":         true,
   "symlinks":     true,
+  "logReq":       true,
+  "logRes":       true,
 
   "headers": [{
     "source": "**",

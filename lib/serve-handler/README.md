@@ -60,6 +60,8 @@ You can use any of the following options:
 | [`symlinks`](#symlinks-boolean)                      | Resolve symlinks instead of rendering a 404 error                     |
 | [`etag`](#etag-boolean)                              | Calculate a strong `ETag` response header, instead of `Last-Modified` |
 | [`auth`](#auth-object)                               | Restrict access using basic auth                                      |
+| [`logReq`](#logreq-boolean)                          | Print a log of all inbound requests                                   |
+| [`logRes`](#logres-boolean)                          | Print a log of all outbound responses                                 |
 
 ### public (String)
 
@@ -317,6 +319,26 @@ The required username/password combination can be configured like this:
 "auth": {
   "name": "required_username",
   "pass": "required_password"
+}
+```
+
+### logReq (Boolean)
+
+Printing a log of all inbound requests is disabled by default and can be enabled like this:
+
+```js
+{
+  "logReq": true
+}
+```
+
+### logRes (Boolean)
+
+Printing a log of all outbound responses is disabled by default and can be enabled like this:
+
+```js
+{
+  "logRes": true
 }
 ```
 

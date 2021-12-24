@@ -22,9 +22,14 @@ Static file serving and directory listing
     * add: (boolean) `symlinks`
     * add: (boolean) `etag`
     * add: (object)  `auth`
+      - restrict access using basic auth
       - attributes:
         * (string) `name`
         * (string) `pass`
+    * add: (boolean) `logReq`
+      - print a log of all inbound requests
+    * add: (boolean) `logRes`
+      - print a log of all outbound responses
 * [serve](https://github.com/vercel/serve)
   - forked from tag: [13.0.2](https://github.com/vercel/serve/releases/tag/13.0.2)
   - changes:
