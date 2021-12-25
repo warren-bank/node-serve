@@ -132,7 +132,8 @@ You can also use so-called "routing segments" as follows:
 ```json
 {
   "rewrites": [
-    { "source": "/projects/:id/edit", "destination": "/edit-project-:id.html" }
+    { "source": "/projects/:id/edit", "destination": "/edit-project-:id.html" },
+    { "source": "/foo/:bar*", "destination": "/:bar" }
   ]
 }
 ```
@@ -140,16 +141,6 @@ You can also use so-called "routing segments" as follows:
 Now, if a visitor accesses `/projects/123/edit`, it will respond with the file `/edit-project-123.html`.
 
 **NOTE:** The paths can contain globs (matched using [minimatch](https://github.com/isaacs/minimatch)) or regular expressions (match using [path-to-regexp](https://github.com/pillarjs/path-to-regexp)).
-
-By default, values matched by a regular expression are encoded by `encodeURIComponent` before being included in the rewritten URL. This encoding can be disabled with the flag:
-
-```json
-{
-  "rewrites": [
-    { "source": "/foo/:bar*", "destination": "/:bar", "raw": true }
-  ]
-}
-```
 
 ### redirects (Array)
 
@@ -179,7 +170,7 @@ Just like with [rewrites](#rewrites-array), you can also use routing segments:
 
 In the example above, `/old-docs/12` would be forwarded to `/new-docs/12` with status code [301](https://en.wikipedia.org/wiki/HTTP_301). In addition `/old` would be forwarded to `/new` with status code [302](https://en.wikipedia.org/wiki/HTTP_302).
 
-**NOTE:** The paths can contain globs (matched using [minimatch](https://github.com/isaacs/minimatch)) or regular expressions (match using [path-to-regexp](https://github.com/pillarjs/path-to-regexp)). Just like with [rewrites](#rewrites-array), you can also disable the encoding of regular expression matches by adding `{raw: true}`.
+**NOTE:** The paths can contain globs (matched using [minimatch](https://github.com/isaacs/minimatch)) or regular expressions (match using [path-to-regexp](https://github.com/pillarjs/path-to-regexp)).
 
 By default, the querystring and hash are not preserved by the redirect. The following boolean attributes enable this behavior:
 

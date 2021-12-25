@@ -6,6 +6,13 @@
   "logReq":       true,
   "logRes":       true,
 
+  "rewrites": [
+    { "source": "/IGNORE_IMPLICIT/:bar*", "destination": "/:bar" }
+  ],
+  "redirects": [
+    { "source": "/IGNORE_EXPLICIT/:bar*", "destination": "/:bar", "preserveQuery": true, "preserveHash": true }
+  ],
+
   "headers": [{
     "source": "**",
     "headers": [
