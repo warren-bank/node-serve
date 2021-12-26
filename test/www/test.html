@@ -3,16 +3,25 @@
   <title>test</title>
   <style>
     body, a {font-size: 18px;}
+    h4      {font-size: 1.15em;}
     a       {text-decoration: none;}
     li      {line-height: 1.5em}
   </style>
 </head>
 <body>
-  3x routes to access the same file:
-  <ol>
-    <li><a href="/foo/bar/ba%23z/test.txt">direct</a></li>
-    <li><a href="/IGNORE_IMPLICIT/foo/bar/ba%23z/test.txt">rewrite</a></li>
-    <li><a href="/IGNORE_EXPLICIT/foo/bar/ba%23z/test.txt">redirect</a></li>
-  </ul>
+  <p>
+    <h4>3x routes to access the same file:</h4>
+    <ol>
+      <li><a href="foo/bar/ba%23z/test.txt">direct</a></li>
+      <li><a href="IGNORE_IMPLICIT/foo/bar/ba%23z/test.txt">rewrite</a></li>
+      <li><a href="IGNORE_EXPLICIT/foo/bar/ba%23z/test.txt">redirect</a></li>
+    </ol>
+  </p>
+  <p>
+    <h4>2x redirects to reach a directory listing w/ querystring data extracted from path:</h4>
+    <ol>
+      <li><a href="IGNORE_EXPLICIT/foo/bar/ba%23z/index.html">redirect</a></li>
+    </ol>
+  </p>
 </body>
 </html>

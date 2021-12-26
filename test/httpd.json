@@ -1,17 +1,11 @@
 {
-  "cleanUrls":    false,
-  "renderSingle": false,
-  "etag":         true,
-  "symlinks":     true,
-  "logReq":       true,
-  "logRes":       true,
-
-  "rewrites": [
-    { "source": "/IGNORE_IMPLICIT/:bar*", "destination": "/:bar" }
-  ],
-  "redirects": [
-    { "source": "/IGNORE_EXPLICIT/:bar*", "destination": "/:bar", "preserveQuery": true, "preserveHash": true }
-  ],
+  "renderSingle":  false,
+  "cleanUrls":     false,
+  "trailingSlash": true,
+  "etag":          true,
+  "symlinks":      true,
+  "logReq":        true,
+  "logRes":        true,
 
   "headers": [{
     "source": "**",
@@ -24,5 +18,25 @@
         "value": "Origin, X-Requested-With, Content-Type, Accept, Range"
       }
     ]
-  }]
+  }],
+
+  "rewrites": [
+    {
+      "source":        ":parent*/(IGNORE_IMPLICIT)+/:pathname*",
+      "destination":   ":parent?/:pathname?"
+    }
+  ],
+
+  "redirects": [
+    {
+      "source":        ":parent*/(IGNORE_IMPLICIT)*/(IGNORE_EXPLICIT)+/:dirname*/:basename(index\\.(?:html|php))",
+      "destination":   ":parent?/IGNORE_EXPLICIT/:dirname?/\\?query=:basename"
+    },
+    {
+      "source":        ":parent*/(IGNORE_IMPLICIT)*/(IGNORE_EXPLICIT)+/:pathname*",
+      "destination":   ":parent?/:pathname?",
+      "preserveQuery": true,
+      "preserveHash":  true
+    }
+  ]
 }
