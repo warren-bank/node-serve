@@ -116,68 +116,104 @@ However, you can also restrict it to certain paths:
 
 If you want your visitors to receive a response under a certain path, but actually serve a completely different one behind the curtains, this option is what you need.
 
-It's perfect for [single page applications](https://en.wikipedia.org/wiki/Single-page_application) (SPAs), for example:
+It's perfect for [single page applications](https://en.wikipedia.org/wiki/Single-page_application) (SPAs).
+
+You can use `glob` patterns (matched using [minimatch](https://github.com/isaacs/minimatch)) as follows:
 
 ```json
 {
   "rewrites": [
-    { "source": "app/**", "destination": "/index.html" },
-    { "source": "projects/*/edit", "destination": "/edit-project.html" }
+    { "engine": "glob", "source": "app/**",          "destination": "/index.html"        },
+    { "engine": "glob", "source": "projects/*/edit", "destination": "/edit-project.html" }
   ]
 }
 ```
 
-You can also use so-called "routing segments" as follows:
+You can also use `route` patterns (matched using [path-to-regexp](https://github.com/pillarjs/path-to-regexp)) that contain _routing segments_ as follows:
 
 ```json
 {
   "rewrites": [
-    { "source": "/projects/:id/edit", "destination": "/edit-project-:id.html" },
-    { "source": "/foo/:bar*", "destination": "/:bar" }
+    { "engine": "route", "source": "/projects/:id/edit", "destination": "/edit-project-:id.html" },
+    { "engine": "route", "source": "/foo/:bar*",         "destination": "/:bar"                  }
   ]
 }
 ```
 
 Now, if a visitor accesses `/projects/123/edit`, it will respond with the file `/edit-project-123.html`.
 
-**NOTE:** The paths can contain globs (matched using [minimatch](https://github.com/isaacs/minimatch)) or regular expressions (match using [path-to-regexp](https://github.com/pillarjs/path-to-regexp)).
+You can also use `regex` patterns as follows:
+
+```json
+{
+  "rewrites": [
+    { "engine": "regex", "source": "^/app/.*$",                 "destination": "/index.html",          "flags": "i" },
+    { "engine": "regex", "source": "^/projects/(?:[^/]+)/edit", "destination": "/edit-project.html"                 },
+    { "engine": "regex", "source": "^/projects/([^/]+)/edit",   "destination": "/edit-project-$1.html"              },
+    { "engine": "regex", "source": "^/foo(/.*)$",               "destination": "$1",                   "flags": "i" }
+  ]
+}
+```
+
+You can also use `text` substrings as follows:
+
+```json
+{
+  "rewrites": [
+    { "engine": "text", "source": "/foo/", "destination": "/" },
+  ]
+}
+```
+
+**NOTE:** Substrings are case-sensitive, and all occurances will be replaced.
+
+By default, after a rule is used to rewrite the requested path, the set of rules are (once again) applied to the newly rewritten path; this process continues recursively until no rules match. Any rule can override this behavior by adding the attribute: `{"terminal": true}`
 
 ### redirects (Array)
 
-In order to redirect visits to a certain path to a different one (or even an external URL), you can use this option:
+The behavior of redirects is very similar to rewrites, but rather than the rewrite happening transparently (ie: behind the curtains).. the visitor is redirected to a new URL.
+
+For example:
 
 ```json
 {
   "redirects": [
-    { "source": "/from", "destination": "/to" },
-    { "source": "/old-pages/**", "destination": "/home" }
+    { "engine": "text",  "source": "/from",            "destination": "/to",           "terminal": true },
+    { "engine": "glob",  "source": "/old-pages/**",    "destination": "/home",         "terminal": true },
+    { "engine": "route", "source": "/old-docs/:id",    "destination": "/new-docs/:id", "terminal": true },
+    { "engine": "regex", "source": "^/old-docs/(.*)$", "destination": "/new-docs/$1",  "terminal": true }
   ]
 }
 ```
 
-By default, all of them are performed with the status code [301](https://en.wikipedia.org/wiki/HTTP_301), but this behavior can be adjusted by setting the `type` property directly on the object (see below).
-
-Just like with [rewrites](#rewrites-array), you can also use routing segments:
+By default, rules are applied to the original request path, which may include URL encodings. In most situations, this is desirable.. as the resulting redirect URL should also be properly encoded. However, if a pattern needs to be applied to a decoded request path.. you can change this behavior by setting the `decode` property directly on the rule object:
 
 ```json
 {
   "redirects": [
-    { "source": "/old-docs/:id", "destination": "/new-docs/:id" },
-    { "source": "/old", "destination": "/new", "type": 302 }
+    { "engine": "text", "source": "/from/###SHA1###", "destination": "/to/hash.txt", "decode": true }
   ]
 }
 ```
 
-In the example above, `/old-docs/12` would be forwarded to `/new-docs/12` with status code [301](https://en.wikipedia.org/wiki/HTTP_301). In addition `/old` would be forwarded to `/new` with status code [302](https://en.wikipedia.org/wiki/HTTP_302).
+**NOTE:** Reencoding of the resulting redirect URL is handled automatically.
 
-**NOTE:** The paths can contain globs (matched using [minimatch](https://github.com/isaacs/minimatch)) or regular expressions (match using [path-to-regexp](https://github.com/pillarjs/path-to-regexp)).
+By default, redirected responses include the status code [301](https://en.wikipedia.org/wiki/HTTP_301), but this behavior can be adjusted by setting the `type` property directly on the rule object:
+
+```json
+{
+  "redirects": [
+    { "engine": "text", "source": "/from", "destination": "/to", "type": 302 }
+  ]
+}
+```
 
 By default, the querystring and hash are not preserved by the redirect. The following boolean attributes enable this behavior:
 
 ```json
 {
   "redirects": [
-    { "source": "/from", "destination": "/to", "preserveQuery": true, "preserveHash": true }
+    { "engine": "text", "source": "/from", "destination": "/to", "preserveQuery": true, "preserveHash": true }
   ]
 }
 ```

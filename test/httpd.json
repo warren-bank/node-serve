@@ -22,21 +22,87 @@
 
   "rewrites": [
     {
+      "engine":        "regex",
+      "source":        "^(.*?)(?:/IGNORE_IMPLICIT)+(.*)$",
+      "destination":   "$1$2",
+      "flags":         "",
+      "terminal":      true
+    },
+
+    {
+      "engine":        "route",
       "source":        ":parent*/(IGNORE_IMPLICIT)+/:pathname*",
-      "destination":   ":parent?/:pathname?"
+      "destination":   ":parent?/:pathname?",
+      "terminal":      true
+    },
+
+    {
+      "engine":        "text",
+      "source":        "/IGNORE_IMPLICIT/",
+      "destination":   "/",
+      "terminal":      true
     }
   ],
 
   "redirects": [
     {
-      "source":        ":parent*/(IGNORE_IMPLICIT)*/(IGNORE_EXPLICIT)+/:dirname*/:basename(index\\.(?:html|php))",
-      "destination":   ":parent?/IGNORE_EXPLICIT/:dirname?/\\?query=:basename"
+      "engine":        "regex",
+      "source":        "^(.*?)(?:/(?:IGNORE_IMPLICIT|IGNORE_EXPLICIT))*(/IGNORE_EXPLICIT)(?:/(?:IGNORE_IMPLICIT|IGNORE_EXPLICIT))*((?:/[^/]*)*)(/)(index\\.(?:html|php))$",
+      "destination":   "$1$2$3$4?query=$5",
+      "flags":         "",
+      "decode":        false,
+      "terminal":      false,
+      "preserveQuery": false,
+      "preserveHash":  false
     },
     {
-      "source":        ":parent*/(IGNORE_IMPLICIT)*/(IGNORE_EXPLICIT)+/:pathname*",
-      "destination":   ":parent?/:pathname?",
+      "engine":        "regex",
+      "source":        "^(.*?)(?:/(?:IGNORE_IMPLICIT|IGNORE_EXPLICIT))*(?:/IGNORE_EXPLICIT)(?:/(?:IGNORE_IMPLICIT|IGNORE_EXPLICIT))*(.*)$",
+      "destination":   "$1$2",
+      "flags":         "",
+      "decode":        false,
+      "terminal":      true,
       "preserveQuery": true,
       "preserveHash":  true
+    },
+
+    {
+      "engine":        "route",
+      "source":        ":parent*/(IGNORE_IMPLICIT)*/(IGNORE_EXPLICIT)+/:dirname*/:basename(index\\.(?:html|php))",
+      "destination":   ":parent?/IGNORE_EXPLICIT/:dirname?/\\?query=:basename",
+      "decode":        false,
+      "terminal":      false,
+      "preserveQuery": false,
+      "preserveHash":  false
+    },
+    {
+      "engine":        "route",
+      "source":        ":parent*/(IGNORE_IMPLICIT)*/(IGNORE_EXPLICIT)+/:pathname*",
+      "destination":   ":parent?/:pathname?",
+      "decode":        false,
+      "terminal":      true,
+      "preserveQuery": true,
+      "preserveHash":  true
+    },
+
+    {
+      "engine":        "glob",
+      "source":        "/**/.gitkeep",
+      "destination":   "/test.html",
+      "decode":        false,
+      "terminal":      true,
+      "preserveQuery": false,
+      "preserveHash":  false
+    },
+
+    {
+      "engine":        "text",
+      "source":        ".gitignore",
+      "destination":   ".gitkeep",
+      "decode":        false,
+      "terminal":      false,
+      "preserveQuery": false,
+      "preserveHash":  false
     }
   ]
 }
