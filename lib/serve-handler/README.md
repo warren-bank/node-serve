@@ -1,10 +1,6 @@
-# serve-handler
+# [serve-handler](https://github.com/warren-bank/node-serve/tree/master/lib/serve-handler)
 
-[![Build Status](https://circleci.com/gh/vercel/serve-handler.svg?&style=shield)](https://circleci.com/gh/vercel/serve-handler)
-[![codecov](https://codecov.io/gh/vercel/serve-handler/branch/master/graph/badge.svg)](https://codecov.io/gh/vercel/serve-handler)
-[![install size](https://packagephobia.now.sh/badge?p=serve-handler)](https://packagephobia.now.sh/result?p=serve-handler)
-
-This package represents the core of [serve](https://github.com/vercel/serve). It can be plugged into any HTTP server and is responsible for routing requests and handling responses.
+This package represents the core of [serve](https://github.com/warren-bank/node-serve). It can be plugged into any HTTP server and is responsible for routing requests and handling responses.
 
 In order to customize the default behaviour, you can also pass custom routing rules, provide your own methods for interacting with the file system and much more.
 
@@ -13,19 +9,19 @@ In order to customize the default behaviour, you can also pass custom routing ru
 Get started by installing the package using [yarn](https://yarnpkg.com/lang/en/):
 
 ```sh
-yarn add serve-handler
+yarn add "@warren-bank/serve"
 ```
 
 You can also use [npm](https://www.npmjs.com/) instead, if you'd like:
 
 ```sh
-npm install serve-handler
+npm install --save "@warren-bank/serve"
 ```
 
 Next, add it to your HTTP server. Here's an example using [micro](https://github.com/vercel/micro):
 
 ```js
-const handler = require('serve-handler');
+const handler = require('@warren-bank/serve/lib/serve-handler');
 
 module.exports = async (request, response) => {
   await handler(request, response);
@@ -394,11 +390,3 @@ await handler(request, response, undefined, {
 ```
 
 **NOTE:** It's important that – for native methods like `createReadStream` – all arguments are passed on to the native call.
-
-## Author
-
-Leo Lamprecht ([@notquiteleo](https://twitter.com/notquiteleo)) - [Vercel](https://vercel.com)
-
-
-[etag]: https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/ETag
-[last-modified]: https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Last-Modified
