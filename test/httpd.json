@@ -103,6 +103,17 @@
       "terminal":      false,
       "preserveQuery": false,
       "preserveHash":  false
+    },
+
+    {
+      "engine":        "regex",
+      "source":        "^/search/([^/]+)/?$",
+      "destination":   "https://www.google.com/search?q=$1",
+      "flags":         "",
+      "decode":        false,
+      "terminal":      true,
+      "preserveQuery": false,
+      "preserveHash":  false
     }
   ]
 }

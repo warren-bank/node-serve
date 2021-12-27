@@ -214,6 +214,18 @@ By default, the querystring and hash are not preserved by the redirect. The foll
 }
 ```
 
+Unlike rewrites, which always resolve the requested path to a file or directory that must exist in the local filesystem, redirects can alias any network resource.
+
+For example:
+
+```json
+{
+  "redirects": [
+    { "engine": "regex", "^/search/([^/]+)/?$", "destination": "https://www.google.com/search?q=$1", "terminal": true }
+  ]
+}
+```
+
 ### headers (Array)
 
 Allows you to set custom headers (and overwrite the default ones) for certain paths:
