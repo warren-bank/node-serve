@@ -53,7 +53,8 @@
       "decode":        false,
       "terminal":      false,
       "preserveQuery": false,
-      "preserveHash":  false
+      "preserveHash":  false,
+      "proxy":         false
     },
     {
       "engine":        "regex",
@@ -63,7 +64,8 @@
       "decode":        false,
       "terminal":      true,
       "preserveQuery": true,
-      "preserveHash":  true
+      "preserveHash":  true,
+      "proxy":         false
     },
 
     {
@@ -73,7 +75,8 @@
       "decode":        false,
       "terminal":      false,
       "preserveQuery": false,
-      "preserveHash":  false
+      "preserveHash":  false,
+      "proxy":         false
     },
     {
       "engine":        "route",
@@ -82,7 +85,8 @@
       "decode":        false,
       "terminal":      true,
       "preserveQuery": true,
-      "preserveHash":  true
+      "preserveHash":  true,
+      "proxy":         false
     },
 
     {
@@ -92,7 +96,8 @@
       "decode":        false,
       "terminal":      true,
       "preserveQuery": false,
-      "preserveHash":  false
+      "preserveHash":  false,
+      "proxy":         false
     },
 
     {
@@ -102,7 +107,8 @@
       "decode":        false,
       "terminal":      false,
       "preserveQuery": false,
-      "preserveHash":  false
+      "preserveHash":  false,
+      "proxy":         false
     },
 
     {
@@ -113,7 +119,31 @@
       "decode":        false,
       "terminal":      true,
       "preserveQuery": false,
-      "preserveHash":  false
+      "preserveHash":  false,
+      "proxy":         false
+    },
+
+    {
+      "engine":        "regex",
+      "source":        "^/whoami/?$",
+      "destination":   "https://httpbin.org/ip",
+      "flags":         "i",
+      "decode":        false,
+      "terminal":      true,
+      "preserveQuery": false,
+      "preserveHash":  false,
+      "proxy":         true
+    },
+    {
+      "engine":        "regex",
+      "source":        "^/post/?$",
+      "destination":   "https://httpbin.org/post",
+      "flags":         "i",
+      "decode":        false,
+      "terminal":      true,
+      "preserveQuery": false,
+      "preserveHash":  false,
+      "proxy":         true
     }
   ]
 }

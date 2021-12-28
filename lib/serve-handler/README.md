@@ -226,6 +226,18 @@ For example:
 }
 ```
 
+When a redirect is an alias for a network resource hosted by a different domain, it is sometimes preferable to proxy the redirected request.. in lieu of sending a `Location` response header. The following boolean attribute enables this behavior:
+
+```json
+{
+  "redirects": [
+    { "engine": "regex", "source": "^/whoami/?$", "destination": "https://httpbin.org/ip", "flags": "i", "terminal": true, "proxy": true }
+  ]
+}
+```
+
+**NOTE:** The request method, headers, and POST/PUT data are included in the proxied redirect request. (see [examples](https://github.com/warren-bank/node-serve/tree/master/test/examples))
+
 ### headers (Array)
 
 Allows you to set custom headers (and overwrite the default ones) for certain paths:

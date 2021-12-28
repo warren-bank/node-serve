@@ -13,6 +13,7 @@
   ],
   "dependencies": {
     "@recent-cli/resolve-lnk": "0.0.2",
+    "@warren-bank/node-request": "2.0.3",
     "basic-auth": "2.0.1",
     "bytes": "3.1.1",
     "content-disposition": "0.5.4",
