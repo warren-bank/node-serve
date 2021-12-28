@@ -12,7 +12,7 @@
     "Content-Type": "application/x-www-form-urlencoded", 
     "Host": "127.0.0.1", 
     "User-Agent": "curl/7.58.0", 
-    "X-Amzn-Trace-Id": "Root=1-61ca9da4-0e9369ec20f5b74b50333f61"
+    "X-Amzn-Trace-Id": "Root=1-61cb8b3f-294c69861c246b9a56779e3d"
   }, 
   "json": null, 
   "origin": "XXX.XXX.XXX.XXX", 
@@ -30,7 +30,7 @@
     "Content-Type": "application/octet-stream", 
     "Host": "127.0.0.1", 
     "User-Agent": "curl/7.58.0", 
-    "X-Amzn-Trace-Id": "Root=1-61ca9da4-323ead1c2e11139833fc7178"
+    "X-Amzn-Trace-Id": "Root=1-61cb8b3f-70c819420da22a567733c75c"
   }, 
   "json": null, 
   "origin": "XXX.XXX.XXX.XXX", 
@@ -48,7 +48,7 @@
     "Content-Type": "image/png", 
     "Host": "127.0.0.1", 
     "User-Agent": "curl/7.58.0", 
-    "X-Amzn-Trace-Id": "Root=1-61ca9da6-4b5d32662c964cae18d298b4"
+    "X-Amzn-Trace-Id": "Root=1-61cb8b40-35c53a2d3774e4a2289d93e1"
   }, 
   "json": null, 
   "origin": "XXX.XXX.XXX.XXX", 

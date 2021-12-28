@@ -7,9 +7,8 @@ Static file serving and directory listing
 * [serve-handler](https://github.com/vercel/serve-handler)
   - forked from tag: [6.1.3](https://github.com/vercel/serve-handler/releases/tag/6.1.3)
   - changes:
-    * though it wasn't my intention, there was a lot of refactoring and cleanup needed
-      - probably fixed a few bugs in the process
-    * more importantly, added the dependency [resolve-lnk](https://github.com/ashbeats/resolve-lnk)
+    * extensive amount of refactoring, rewriting, bug fixes, and new features (too many to list)
+    * added the dependency [resolve-lnk](https://github.com/ashbeats/resolve-lnk)
       - when `config.symlinks` is enabled (ex: `serve --symlinks`), Windows shortcuts are processed in the same way as symbolic links
       - a Windows shortcut to a file will retrieve its contents
       - a Windows shortcut to a directory will list its contents
@@ -34,6 +33,7 @@ Static file serving and directory listing
   - forked from tag: [13.0.2](https://github.com/vercel/serve/releases/tag/13.0.2)
   - changes:
     * update the `serve-handler` and `schemas` dependencies to use the modified versions (above)
+    * bug fixes: SSL certificates with passphrase
 
 #### Install:
 
@@ -48,7 +48,7 @@ Static file serving and directory listing
     serve <options>
   ```
 * the [long version](./lib/serve/README.md#usage)
-* the easy way, using some [preconfigured scripts](https://github.com/warren-bank/node-serve/tree/master/test)
+* the easy way, using some [preconfigured scripts](https://github.com/warren-bank/node-serve/tree/master/.etc/bin)
 
 #### Legal:
 

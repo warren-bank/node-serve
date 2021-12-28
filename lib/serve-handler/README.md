@@ -236,7 +236,7 @@ When a redirect is an alias for a network resource hosted by a different domain,
 }
 ```
 
-**NOTE:** The request method, headers, and POST/PUT data are included in the proxied redirect request. (see [examples](https://github.com/warren-bank/node-serve/tree/master/test/examples))
+**NOTE:** The request method, headers, and POST/PUT data are included in the proxied redirect request. (see [tests](https://github.com/warren-bank/node-serve/blob/master/.etc/test/tests.bat) using [redirect rule](https://github.com/warren-bank/node-serve/blob/master/.etc/bin/http/httpd.json#L139))
 
 ### headers (Array)
 
