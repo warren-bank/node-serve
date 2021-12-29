@@ -10,13 +10,13 @@
     "Accept-Encoding": "identity, gzip, deflate, br", 
     "Content-Length": "11", 
     "Content-Type": "application/x-www-form-urlencoded", 
-    "Host": "127.0.0.1", 
+    "Host": "httpbin.org", 
     "User-Agent": "curl/7.58.0", 
-    "X-Amzn-Trace-Id": "Root=1-61cb8296-137d2fa270c7866e07c96f4d"
+    "X-Amzn-Trace-Id": "Root=1-61ccb210-7733ecbc672609763da96cde"
   }, 
   "json": null, 
   "origin": "XXX.XXX.XXX.XXX", 
-  "url": "https://127.0.0.1/post"
+  "url": "https://httpbin.org/post"
 }
 {
   "args": {}, 
@@ -28,13 +28,13 @@
     "Accept-Encoding": "identity, gzip, deflate, br", 
     "Content-Length": "11", 
     "Content-Type": "application/octet-stream", 
-    "Host": "127.0.0.1", 
+    "Host": "httpbin.org", 
     "User-Agent": "curl/7.58.0", 
-    "X-Amzn-Trace-Id": "Root=1-61cb8296-1a14e0bc30427d501b867eb9"
+    "X-Amzn-Trace-Id": "Root=1-61ccb210-7afaefd578d3fc59019db4cc"
   }, 
   "json": null, 
   "origin": "XXX.XXX.XXX.XXX", 
-  "url": "https://127.0.0.1/post"
+  "url": "https://httpbin.org/post"
 }
 {
   "args": {}, 
@@ -46,11 +46,11 @@
     "Accept-Encoding": "identity, gzip, deflate, br", 
     "Content-Length": "958", 
     "Content-Type": "image/png", 
-    "Host": "127.0.0.1", 
+    "Host": "httpbin.org", 
     "User-Agent": "curl/7.58.0", 
-    "X-Amzn-Trace-Id": "Root=1-61cb8297-2af8393c4037dd0958afcc09"
+    "X-Amzn-Trace-Id": "Root=1-61ccb210-6fbaf38d1a4435e806e1daf5"
   }, 
   "json": null, 
   "origin": "XXX.XXX.XXX.XXX", 
-  "url": "https://127.0.0.1/post"
+  "url": "https://httpbin.org/post"
 }
