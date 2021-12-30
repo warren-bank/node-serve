@@ -156,12 +156,13 @@ You can also use `text` substrings as follows:
 ```json
 {
   "rewrites": [
-    { "engine": "text", "source": "/foo/", "destination": "/" },
+    { "engine": "text", "source": "/foo/",        "destination": "/" },
+    { "engine": "text", "source": "/favicon.ico", "destination": "data:image/x-icon;base64,AAABAAEAAQEAAAEAGAAwAAAAFgAAACgAAAABAAAAAgAAAAEAGAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAP8AAAAAAA==", "exact": true, "terminal": true }
   ]
 }
 ```
 
-**NOTE:** Substrings are case-sensitive, and all occurances will be replaced.
+**NOTE:** Substrings are case-sensitive. By default, all occurances of `source` will be replaced. The `{"exact": true}` attribute adds the condition that `source` must exactly match the full request path. If this is not the case, then no occurances will be replaced. If this is the case, then exactly one occurance (ie: the full request path) will be replaced by `destination`.
 
 By default, after a rule is used to rewrite the requested path, the set of rules are (once again) applied to the newly rewritten path; this process continues recursively until no rules match. Any rule can override this behavior by adding the attribute: `{"terminal": true}`
 
