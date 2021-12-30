@@ -13,6 +13,9 @@ Static file serving and directory listing
       - a Windows shortcut to a file will retrieve its contents
       - a Windows shortcut to a directory will list its contents
         * nesting multiple Windows directory shortcuts works as expected
+    * added the dependency [strong-data-uri](https://github.com/strongloop/strong-data-uri)
+      - to allow rewrite and redirect rules to specify a `data:` URI destination
+      - the `data:` URI is parsed and returned in the response
 * [schemas](https://github.com/vercel/schemas)
   - forked from tag: [2.19.0](https://github.com/vercel/schemas/releases/tag/2.19.0)
   - files:

@@ -23,6 +23,7 @@
     "minimatch": "3.0.4",
     "on-finished": "2.3.0",
     "path-to-regexp": "6.2.0",
-    "range-parser": "1.2.1"
+    "range-parser": "1.2.1",
+    "strong-data-uri": "1.0.6"
   }
 }
