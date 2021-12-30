@@ -1,17 +1,23 @@
 {
   "name": "@warren-bank/serve",
-  "version": "130002.7.1",
+  "version": "130002.7.2",
   "description": "Static file serving and directory listing",
   "author": "Warren Bank (https://github.com/warren-bank)",
   "license": "GPL-2.0",
   "keywords": [
     "serve",
-    "server",
-    "static",
     "http",
     "httpd",
     "https",
-    "httpsd"
+    "httpsd",
+    "server",
+    "static",
+    "web server",
+    "webserver",
+    "static file web server",
+    "static file webserver",
+    "SPA web server",
+    "SPA webserver"
   ],
   "scripts": {
     "postinstall": "npm install ./lib/serve-handler && npm install ./lib/serve"
