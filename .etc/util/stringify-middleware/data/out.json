@@ -1,0 +1,9 @@
+{
+  "proxyMiddleware": [
+    {
+      "engine": "text",
+      "source": "https://www.google.com/search?q=",
+      "middleware": "function($) {\n      // https://github.com/cheeriojs/cheerio\n\n      const results = $('#search')\n      $('body').empty().append(results)\n    }"
+    }
+  ]
+}

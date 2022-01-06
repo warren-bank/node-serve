@@ -48,6 +48,7 @@ You can use any of the following options:
 | [`cleanUrls`](#cleanurls-booleanarray)               | Have the `.html` extension stripped from paths                        |
 | [`rewrites`](#rewrites-array)                        | Rewrite paths to different paths                                      |
 | [`redirects`](#redirects-array)                      | Forward paths to different paths or external URLs                     |
+| [`proxyMiddleware`](#proxymiddleware-array)          | Rewrite the HTML DOM in responses for proxied redirects               |
 | [`headers`](#headers-array)                          | Set custom headers for specific paths                                 |
 | [`directoryListing`](#directorylisting-booleanarray) | Disable directory listing or restrict it to certain paths             |
 | [`unlisted`](#unlisted-array)                        | Exclude paths from the directory listing                              |
@@ -239,6 +240,28 @@ When a redirect is an alias for a network resource hosted by a different domain,
 
 **NOTE:** The request method, headers, and POST/PUT data are included in the proxied redirect request. (see [tests](https://github.com/warren-bank/node-serve/blob/master/.etc/test/tests.bat) using [redirect rule](https://github.com/warren-bank/node-serve/blob/master/.etc/bin/http/httpd.json#L139))
 
+### proxyMiddleware (Array)
+
+When a redirect request is proxied, the HTML DOM in a response can be modified by middleware (using [cheerio](https://github.com/cheeriojs/cheerio)) before it is returned to the client.
+
+For example:
+
+```js
+{
+  "proxyMiddleware": [
+    {
+      "engine":        "text",
+      "source":        "https://www.google.com/search?q=",
+      "middleware":    function($) { const results = $('#search'); $('body').empty().append(results); $('div[jscontroller], h2, script, style').remove(); }
+    }
+  ]
+}
+```
+
+**NOTE:** Each `middleware` value is a function that is passed an instance of `cheerio`. When multiple rules match the redirected URL, they are all processed sequentially in the same order that the rules are defined. The `middleware` in the first rule receives an instance of `cheerio` that is loaded with the proxied HTML response. The `middleware` in subsequent rules receive the same instance of `cheerio`, which has been modified by the `middleware` in all previous rules.
+
+**NOTE:** [`serve`](https://github.com/warren-bank/node-serve/tree/master/lib/serve) reads its config object from a text file containing JSON, which is validated against a schema and then parsed. Since a function isn't a valid JSON data type, `middleware` values need to be converted to string (using [`Function.prototype.toString()`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Function/toString)); the [`stringify-middleware` utility](https://github.com/warren-bank/node-serve/tree/master/.etc/util) simplifies this task.
+
 ### headers (Array)
 
 Allows you to set custom headers (and overwrite the default ones) for certain paths:
@@ -359,7 +382,7 @@ Sending an `ETag` header is disabled by default and can be enabled like this:
 
 ### auth (Object)
 
-Restrict access to visitors using basic auth, which presents a username/password challenge prompt.
+Restrict access to visitors with [basic authentication](https://en.wikipedia.org/wiki/Basic_access_authentication) (using [basic-auth](https://github.com/jshttp/basic-auth)), which presents a username/password challenge prompt.
 
 The required username/password combination can be configured like this:
 
@@ -390,7 +413,7 @@ Printing a log of all outbound responses is disabled by default and can be enabl
 }
 ```
 
-## Error templates
+## Error Templates
 
 The handler will automatically determine the right error format if one occurs and then sends it to the client in that format.
 
@@ -398,7 +421,7 @@ Furthermore, this allows you to not just specifiy an error template for `404` er
 
 Just add a `<status-code>.html` file to the root directory and you're good.
 
-## Middleware
+## Dependency Injection
 
 If you want to replace the methods the package is using for interacting with the file system and sending responses, you can pass them as the fourth argument to the function call.
 
