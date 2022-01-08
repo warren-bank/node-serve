@@ -39,10 +39,49 @@ Static file serving and directory listing
       - shape: array of objects
       - attributes of each object:
         * (string) `engine`
+          - must be one of the following values:
+            * _glob_
+            * _route_
+            * _regex_
+            * _text_
         * (string) `source`
+        * (string) `type`
+          - must be one of the following values:
+            * _html_
+            * _json_
+            * _js_
+            * _text_
         * (string) `middleware`
           - holds a stringified function
             * produced by: [`Function.prototype.toString()`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Function/toString)
+        * (boolean) `terminal`
+      - usage:
+        * a `middleware` function is only called for a proxied response when:
+          - `source` matches the URL of the redirected request
+            * `engine` determines the methodology that is used to match `source` with the URL
+              - _glob_
+                * uses [minimatch](https://github.com/isaacs/minimatch)
+              - _route_
+                * uses [path-to-regexp](https://github.com/pillarjs/path-to-regexp)
+              - _regex_
+                * uses a standard regular expression pattern
+                * an optional (string) `flags` attribute can add regex modifiers (ex: "i")
+              - _text_
+                * uses the presence of a case-sensitive substring
+                * an optional (boolean) `exact` attribute can add the requirement that the substring must match the entire URL
+          - `type` matches the generalized grouping of _content-type_ values to which the data in the response is categorized
+        * a `middleware` function is passed a single parameter, which depends upon the `type` of response data
+          - _html_
+            * is passed an instance of [cheerio](https://github.com/cheeriojs/cheerio)
+            * allows direct manipulation of DOM elements
+          - _json_
+            * is passed: `{response: data}`
+            * where `data` is the data structure obtained by parsing the JSON response
+            * allows direct manipulation of the data structure
+          - _js_ and _text_
+            * are passed: `{response: data}`
+            * where `data` is the raw text response
+            * allows direct manipulation of the text response
     * add: (boolean) `logReq`
       - print a log of all inbound requests
     * add: (boolean) `logRes`

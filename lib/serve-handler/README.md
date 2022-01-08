@@ -249,7 +249,39 @@ When a redirect is an alias for a network resource hosted by a different domain,
 
 ### proxyMiddleware (Array)
 
-When a redirect request is proxied, the HTML DOM in a response can be modified by middleware (using [cheerio](https://github.com/cheeriojs/cheerio)) before it is returned to the client.
+When a redirect request is proxied, the text in a response can be modified by middleware before it is returned to the client.
+
+Similar to rewrite and redirect rules, an `engine` attribute is used to determine how `source` will be matched with the URL of the redirected request:
+* _glob_
+* _route_
+* _regex_
+  - supports an optional _flags_ attribute
+* _text_
+  - supports an optional _exact_ attribute
+
+The format of the text in a response will determine which `middleware` functions will be called to apply modifications,
+as well as the format of the singular parameter passed to the `middleware` functions.
+
+For simplicity, _content-types_ that represent the same text format are grouped together and given a name.
+The following groups are currently supported:
+* _html_
+* _json_
+* _js_
+* _text_
+
+For any `middleware` function to be called:
+* the URL of the redirected request must match `source` using `engine`
+* the name of the group for the _content-type_ of the proxied response must match `type`
+
+If called, then the format of the singular parameter (ex: `param`) passed to the `middleware` function is determined by `type` as follows:
+* _html_
+  - an instance of [cheerio](https://github.com/cheeriojs/cheerio) to enable direct manipulation of DOM elements
+* _json_
+  - an object: `{response: data}`
+  - where `param.response` is the data structure obtained by parsing the JSON response
+* _js_ and _text_
+  - an object: `{response: data}`
+  - where `param.response` is the raw text response
 
 For example:
 
@@ -259,13 +291,22 @@ For example:
     {
       "engine":        "text",
       "source":        "https://www.google.com/search?q=",
-      "middleware":    function($) { const results = $('#search'); $('body').empty().append(results); $('div[jscontroller], h2, script, style').remove(); }
+      "type":          "html",
+      "middleware":    "function($) { const results = $('#search'); $('body').empty().append(results); $('div[jscontroller], h2, script, style').remove(); }",
+      "terminal":      true
+    },
+    {
+      "engine":        "text",
+      "source":        "https://httpbin.org/ip",
+      "type":          "json",
+      "middleware":    "function(data) { if (data.response instanceof Object) Object.assign(data.response, {hello: 'world'}); }",
+      "terminal":      true
     }
   ]
 }
 ```
 
-**NOTE:** Each `middleware` value is a function that is passed an instance of `cheerio`. When multiple rules match the redirected URL, they are all processed sequentially in the same order that the rules are defined. The `middleware` in the first rule receives an instance of `cheerio` that is loaded with the proxied HTML response. The `middleware` in subsequent rules receive the same instance of `cheerio`, which has been modified by the `middleware` in all previous rules. Any rule can prevent further modification by adding the attribute: `{"terminal": true}`
+**NOTE:** All `middleware` functions that match a particular proxied request/response are called sequentially in the same order that the rules are defined. The same singular parameter is passed by reference to all, and changes to its value accumulate. Any rule can prevent further modification by adding the attribute: `{"terminal": true}`
 
 **NOTE:** [`serve`](https://github.com/warren-bank/node-serve/tree/master/lib/serve) reads its config object from a text file containing JSON, which is validated against a schema and then parsed. Since a function isn't a valid JSON data type, `middleware` values need to be converted to string (using [`Function.prototype.toString()`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Function/toString)); the [`stringify-middleware` utility](https://github.com/warren-bank/node-serve/tree/master/.etc/util) simplifies this task.
 

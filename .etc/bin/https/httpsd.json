@@ -174,7 +174,16 @@
     {
       "engine":        "text",
       "source":        "https://www.google.com/search?q=",
-      "middleware":    "function($) { const results = $('#search'); $('body').empty().append(results); $('div[jscontroller], h2, script, style').remove(); }"
+      "type":          "html",
+      "middleware":    "function($) { const results = $('#search'); $('body').empty().append(results); $('div[jscontroller], h2, script, style').remove(); }",
+      "terminal":      true
+    },
+    {
+      "engine":        "text",
+      "source":        "https://httpbin.org/ip",
+      "type":          "json",
+      "middleware":    "function(data) { if (data.response instanceof Object) Object.assign(data.response, {hello: 'world'}); }",
+      "terminal":      true
     }
   ]
 }
