@@ -261,7 +261,7 @@ For example:
 }
 ```
 
-**NOTE:** Each `middleware` value is a function that is passed an instance of `cheerio`. When multiple rules match the redirected URL, they are all processed sequentially in the same order that the rules are defined. The `middleware` in the first rule receives an instance of `cheerio` that is loaded with the proxied HTML response. The `middleware` in subsequent rules receive the same instance of `cheerio`, which has been modified by the `middleware` in all previous rules.
+**NOTE:** Each `middleware` value is a function that is passed an instance of `cheerio`. When multiple rules match the redirected URL, they are all processed sequentially in the same order that the rules are defined. The `middleware` in the first rule receives an instance of `cheerio` that is loaded with the proxied HTML response. The `middleware` in subsequent rules receive the same instance of `cheerio`, which has been modified by the `middleware` in all previous rules. Any rule can prevent further modification by adding the attribute: `{"terminal": true}`
 
 **NOTE:** [`serve`](https://github.com/warren-bank/node-serve/tree/master/lib/serve) reads its config object from a text file containing JSON, which is validated against a schema and then parsed. Since a function isn't a valid JSON data type, `middleware` values need to be converted to string (using [`Function.prototype.toString()`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Function/toString)); the [`stringify-middleware` utility](https://github.com/warren-bank/node-serve/tree/master/.etc/util) simplifies this task.
 
