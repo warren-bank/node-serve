@@ -32,6 +32,8 @@ Static file serving and directory listing
       - attributes:
         * (string) `name`
         * (string) `pass`
+    * add: (string) `proxyCookieJar`
+      - file path to a persistent text file used by proxied redirects to store cookie data in JSON format
     * add: (array) `proxyMiddleware`
       - rewrite the HTML DOM in responses for proxied redirects
       - shape: array of objects
@@ -49,8 +51,10 @@ Static file serving and directory listing
   - forked from tag: [13.0.2](https://github.com/vercel/serve/releases/tag/13.0.2)
   - changes:
     * update the `serve-handler` and `schemas` dependencies to use the modified versions (above)
-    * bug fixes: SSL certificates with passphrase
     * adds a [`reviver` function](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/JSON/parse#using_the_reviver_parameter) to reconstruct/rehydrate [`middleware`](https://github.com/warren-bank/node-serve/tree/master/lib/serve-handler#proxymiddleware-array) functions in the config object from JSON
+  - bug fixes:
+    * SSL certificates with passphrase
+    * logic to resolve the [`public` option](https://github.com/warren-bank/node-serve/tree/master/lib/serve-handler#public-string) from a command-line argument
 
 #### Install:
 
