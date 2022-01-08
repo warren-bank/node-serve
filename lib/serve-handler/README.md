@@ -87,19 +87,21 @@ Using absolute path:
 
 ### cleanUrls (Boolean|Array)
 
-By default, all `.html` files can be accessed without their extension.
+By default, `.html` files can only be accessed by requesting a path that includes this file extension.
 
-If one of these extensions is used at the end of a filename, it will automatically perform a redirect with status code [301](https://en.wikipedia.org/wiki/HTTP_301) to the same path, but with the extension dropped.
+When this option is enabled:
+* requests that include an `.html` file extension will automatically perform a redirect with status code [301](https://en.wikipedia.org/wiki/HTTP_301) to the same path, but with the extension dropped
+* requests to this _clean_ path will be transparently rewritten to read from the original file path
 
-You can disable the feature like follows:
+You can enable the feature like follows:
 
 ```json
 {
-  "cleanUrls": false
+  "cleanUrls": true
 }
 ```
 
-However, you can also restrict it to certain paths:
+However, you can also restrict it to only certain paths:
 
 ```json
 {
@@ -111,6 +113,8 @@ However, you can also restrict it to certain paths:
 ```
 
 **NOTE:** The paths can only contain globs that are matched using [minimatch](https://github.com/isaacs/minimatch).
+
+**WARNING:** It is __strongly__ advised to never enable both this option and [`trailingSlash`](#trailingslash-boolean). Doing so will result in broken relative links.
 
 ### rewrites (Array)
 
