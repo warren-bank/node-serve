@@ -7,6 +7,8 @@
   "logReq":        true,
   "logRes":        true,
 
+  "proxyCookieJar": "proxy-cookie-jar/cookies.json",
+
   "headers": [{
     "source": "**",
     "headers": [

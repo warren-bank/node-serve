@@ -44,11 +44,12 @@ You can use any of the following options:
 
 | Property                                             | Description                                                           |
 |------------------------------------------------------|-----------------------------------------------------------------------|
-| [`public`](#public-string)                           | Set a sub directory to be served                                      |
+| [`public`](#public-string)                           | Directory path to the web root folder                                 |
 | [`cleanUrls`](#cleanurls-booleanarray)               | Have the `.html` extension stripped from paths                        |
 | [`rewrites`](#rewrites-array)                        | Rewrite paths to different paths                                      |
 | [`redirects`](#redirects-array)                      | Forward paths to different paths or external URLs                     |
 | [`proxyMiddleware`](#proxymiddleware-array)          | Rewrite the HTML DOM in responses for proxied redirects               |
+| [`proxyCookieJar`](#proxycookiejar-string)           | File path to the persistent text file used to store cookie data       |
 | [`headers`](#headers-array)                          | Set custom headers for specific paths                                 |
 | [`directoryListing`](#directorylisting-booleanarray) | Disable directory listing or restrict it to certain paths             |
 | [`unlisted`](#unlisted-array)                        | Exclude paths from the directory listing                              |
@@ -62,7 +63,9 @@ You can use any of the following options:
 
 ### public (String)
 
-By default, the current working directory will be served. If you only want to serve a specific path, you can use this options to pass an absolute path or a custom directory to be served relative to the current working directory.
+By default, the current working directory will be served.
+This option can be used to serve a specific directory path.
+If the provided directory path is not an absolute path, then it is resolved relative to the current working directory.
 
 For example, if serving a [Jekyll](https://jekyllrb.com/) app, it would look like this:
 
@@ -261,6 +264,14 @@ For example:
 **NOTE:** Each `middleware` value is a function that is passed an instance of `cheerio`. When multiple rules match the redirected URL, they are all processed sequentially in the same order that the rules are defined. The `middleware` in the first rule receives an instance of `cheerio` that is loaded with the proxied HTML response. The `middleware` in subsequent rules receive the same instance of `cheerio`, which has been modified by the `middleware` in all previous rules.
 
 **NOTE:** [`serve`](https://github.com/warren-bank/node-serve/tree/master/lib/serve) reads its config object from a text file containing JSON, which is validated against a schema and then parsed. Since a function isn't a valid JSON data type, `middleware` values need to be converted to string (using [`Function.prototype.toString()`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Function/toString)); the [`stringify-middleware` utility](https://github.com/warren-bank/node-serve/tree/master/.etc/util) simplifies this task.
+
+### proxyCookieJar (String)
+
+File path to the persistent text file used by proxied redirect requests to store cookie data in JSON format.
+
+By default, no cookie jar is used.
+This option can be used to enable this feature.
+If the provided file path is not an absolute path, then it is resolved relative to the current working directory.
 
 ### headers (Array)
 

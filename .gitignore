@@ -1,3 +1,6 @@
 node_modules/
 lib/serve/node_modules/
 lib/serve-handler/node_modules/
+
+.etc/bin/http/proxy-cookie-jar/cookies.json
+.etc/bin/https/proxy-cookie-jar/cookies.json

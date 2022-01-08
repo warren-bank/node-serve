@@ -12,8 +12,7 @@ if not exist %www_root% (
   goto :done
 )
 
-cd /D %www_root%
-call "%~dp0.\httpsd.cmd" .
+call "%~dp0.\httpsd.cmd" %www_root%
 
 :done
 echo.
