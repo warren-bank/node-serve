@@ -48,7 +48,7 @@ You can use any of the following options:
 | [`cleanUrls`](#cleanurls-booleanarray)               | Have the `.html` extension stripped from paths                        |
 | [`rewrites`](#rewrites-array)                        | Rewrite paths to different paths                                      |
 | [`redirects`](#redirects-array)                      | Forward paths to different paths or external URLs                     |
-| [`proxyMiddleware`](#proxymiddleware-array)          | Rewrite the HTML DOM in responses for proxied redirects               |
+| [`proxyMiddleware`](#proxymiddleware-array)          | Modify the text content in responses for proxied redirects            |
 | [`proxyCookieJar`](#proxycookiejar-string)           | File path to the persistent text file used to store cookie data       |
 | [`headers`](#headers-array)                          | Set custom headers for specific paths                                 |
 | [`directoryListing`](#directorylisting-booleanarray) | Disable directory listing or restrict it to certain paths             |
@@ -249,7 +249,7 @@ When a redirect is an alias for a network resource hosted by a different domain,
 
 ### proxyMiddleware (Array)
 
-When a redirect request is proxied, the text in a response can be modified by middleware before it is returned to the client.
+When a redirect request is proxied, the text content in its response can be modified by middleware before it is returned to the client.
 
 Similar to rewrite and redirect rules, an `engine` attribute is used to determine how `source` will be matched with the URL of the redirected request:
 * _glob_
@@ -317,6 +317,8 @@ File path to the persistent text file used by proxied redirect requests to store
 By default, no cookie jar is used.
 This option can be used to enable this feature.
 If the provided file path is not an absolute path, then it is resolved relative to the current working directory.
+
+**NOTE:** [`serve`](https://github.com/warren-bank/node-serve/tree/master/lib/serve) reads its config object from a text file containing JSON, which is validated against a schema and then parsed. If the file path for `proxyCookieJar` in this JSON file is not an absolute path, then it is resolved relative to the directory containing the JSON file.
 
 ### headers (Array)
 

@@ -35,7 +35,7 @@ Static file serving and directory listing
     * add: (string) `proxyCookieJar`
       - file path to a persistent text file used by proxied redirects to store cookie data in JSON format
     * add: (array) `proxyMiddleware`
-      - rewrite the HTML DOM in responses for proxied redirects
+      - apply custom middleware to modify the text content in responses for proxied redirects
       - shape: array of objects
       - attributes of each object:
         * (string) `engine`
