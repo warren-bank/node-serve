@@ -9,18 +9,39 @@
 
   "proxyCookieJar": "proxy-cookie-jar/cookies.json",
 
-  "headers": [{
-    "source": "**",
-    "headers": [
-      {
-        "key": "Access-Control-Allow-Origin",
-        "value": "*"
-      }, {
-        "key": "Access-Control-Allow-Headers",
-        "value": "Origin, X-Requested-With, Content-Type, Accept, Range"
-      }
-    ]
-  }],
+  "headers": [
+    {
+      "source":  "**",
+      "headers": [
+        {
+          "key":   "Access-Control-Allow-Origin",
+          "value": "*"
+        },
+        {
+          "key":   "Access-Control-Allow-Headers",
+          "value": "Origin, X-Requested-With, Content-Type, Accept, Range"
+        }
+      ]
+    },
+    {
+      "source":  "**/cgi-bin/**/*.+(pl|sh|bat)",
+      "headers": [
+        {
+          "key":   "Content-Type",
+          "value": "text/plain"
+        }
+      ]
+    },
+    {
+      "source":  "**/cgi-bin/**/*.php",
+      "headers": [
+        {
+          "key":   "Content-Type",
+          "value": "text/html"
+        }
+      ]
+    }
+  ],
 
   "rewrites": [
     {
@@ -184,6 +205,32 @@
       "type":          "json",
       "middleware":    "function(data) { if (data.response instanceof Object) Object.assign(data.response, {hello: 'world'}); }",
       "terminal":      true
+    }
+  ],
+
+  "cgiBin": [
+    {
+      "engine":        "glob",
+      "source":        "**/cgi-bin/**/*.pl",
+      "command":       "perl {{source}}",
+      "env":           { "PATH": "C:/PortableApps/perl/5.10.1" }
+    },
+    {
+      "engine":        "glob",
+      "source":        "**/cgi-bin/**/*.php",
+      "command":       "php {{source}}",
+      "env":           { "PATH": "C:/PortableApps/php/8.0.0" }
+    },
+    {
+      "engine":        "glob",
+      "source":        "**/cgi-bin/**/*.sh",
+      "command":       "bash --noprofile --norc --noediting {{source}}",
+      "env":           { "PATH": "C:/PortableApps/PortableGit/2.16.2/bin" }
+    },
+    {
+      "engine":        "glob",
+      "source":        "**/cgi-bin/**/*.bat",
+      "command":       "cmd.exe /c {{source}}"
     }
   ]
 }

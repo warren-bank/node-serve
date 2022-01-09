@@ -48,6 +48,7 @@ You can use any of the following options:
 | [`cleanUrls`](#cleanurls-booleanarray)               | Have the `.html` extension stripped from paths                        |
 | [`rewrites`](#rewrites-array)                        | Rewrite paths to different paths                                      |
 | [`redirects`](#redirects-array)                      | Forward paths to different paths or external URLs                     |
+| [`cgiBin`](#cgibin-array)                            | Execute _cgi-bin_ scripts and return _stdout_ in response             |
 | [`proxyMiddleware`](#proxymiddleware-array)          | Modify the text content in responses for proxied redirects            |
 | [`proxyCookieJar`](#proxycookiejar-string)           | File path to the persistent text file used to store cookie data       |
 | [`headers`](#headers-array)                          | Set custom headers for specific paths                                 |
@@ -246,6 +247,77 @@ When a redirect is an alias for a network resource hosted by a different domain,
 ```
 
 **NOTE:** The request method, headers, and POST/PUT data are included in the proxied redirect request. (see [tests](https://github.com/warren-bank/node-serve/blob/master/.etc/test/tests.bat) using [redirect rule](https://github.com/warren-bank/node-serve/blob/master/.etc/bin/http/httpd.json#L139))
+
+### cgiBin (Array)
+
+After a requested path is resolved to a real file, which may be the end result of several `rewrites`, this option enables the filepath to be used as a parameter to a command-line instruction.. and the resulting output to be returned to the client as a response.
+
+Similar to rewrite and redirect rules, an `engine` attribute is used to determine how `source` will be matched with the absolute filepath (normalized to use a '/' directory separator on all platforms):
+* _glob_
+* _route_
+* _regex_
+  - supports an optional _flags_ attribute
+* _text_
+  - supports an optional _exact_ attribute
+
+A `command` attribute holds a string with the command-line instruction to execute. The current working directory is normalized to the directory containing the file. The special token `{{source}}` in the `command` string will be interpolated to the absolute filepath using the native directory separator and enclosed by double quotes.
+
+An optional `env` attribute holds an object to define environment variable key/value pairs that should exist during execution.
+
+For example:
+
+```json
+{
+  "cgiBin": [
+    {
+      "engine":        "glob",
+      "source":        "**/cgi-bin/**/*.pl",
+      "command":       "perl {{source}}",
+      "env":           { "PATH": "C:/PortableApps/perl/5.10.1" }
+    },
+    {
+      "engine":        "glob",
+      "source":        "**/cgi-bin/**/*.php",
+      "command":       "php {{source}}",
+      "env":           { "PATH": "C:/PortableApps/php/8.0.0" }
+    },
+    {
+      "engine":        "glob",
+      "source":        "**/cgi-bin/**/*.sh",
+      "command":       "bash --noprofile --norc --noediting {{source}}",
+      "env":           { "PATH": "C:/PortableApps/PortableGit/2.16.2/bin" }
+    },
+    {
+      "engine":        "glob",
+      "source":        "**/cgi-bin/**/*.bat",
+      "command":       "cmd.exe /c {{source}}"
+    }
+  ],
+
+  "headers": [
+    {
+      "source":  "**/cgi-bin/**/*.+(pl|sh|bat)",
+      "headers": [
+        {
+          "key":   "Content-Type",
+          "value": "text/plain"
+        }
+      ]
+    },
+    {
+      "source":  "**/cgi-bin/**/*.php",
+      "headers": [
+        {
+          "key":   "Content-Type",
+          "value": "text/html"
+        }
+      ]
+    }
+  ]
+}
+```
+
+**NOTE:** If the absolute filepath matches `source` in more than one rule, the `command` in only the first matching rule will be executed.
 
 ### proxyMiddleware (Array)
 

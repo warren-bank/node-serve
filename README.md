@@ -82,6 +82,23 @@ Static file serving and directory listing
             * are passed: `{response: data}`
             * where `data` is the raw text response
             * allows direct manipulation of the text response
+    * add: (array) `cgiBin`
+      - execute _cgi-bin_ scripts and return _stdout_ in response
+      - shape: array of objects
+      - attributes of each object:
+        * (string) `engine`
+          - must be one of the following values:
+            * _glob_
+            * _route_
+            * _regex_
+            * _text_
+        * (string) `source`
+        * (string) `command`
+          - the command-line instruction to execute
+            * the current working directory is normalized to the directory containing the `source` file
+            * the special token `{{source}}` in the `command` string will be interpolated to the absolute filepath using the native directory separator and enclosed by double quotes
+        * (object) `env`
+          - an optional key/value map for environment variables that should exist during execution
     * add: (boolean) `logReq`
       - print a log of all inbound requests
     * add: (boolean) `logRes`
@@ -109,14 +126,6 @@ Static file serving and directory listing
   ```
 * the [long version](./lib/serve/README.md#usage)
 * the easy way, using some [preconfigured scripts](https://github.com/warren-bank/node-serve/tree/master/.etc/bin)
-
-#### Older Releases:
-
-* [`@warren-bank/serve@130002.7.3`](https://github.com/warren-bank/node-serve/tree/130002.7.3)
-  - final stable release that does not include:
-    * the ~2MB dependency: [cheerio](https://github.com/cheeriojs/cheerio)
-  - notes:
-    * perfectly good version to install for a user who will never write custom [`middleware`](https://github.com/warren-bank/node-serve/tree/master/lib/serve-handler#proxymiddleware-array)
 
 #### Legal:
 
