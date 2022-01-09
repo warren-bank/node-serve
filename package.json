@@ -1,6 +1,6 @@
 {
   "name": "@warren-bank/serve",
-  "version": "130002.9.0",
+  "version": "130002.9.1",
   "description": "Static file serving and directory listing",
   "author": "Warren Bank (https://github.com/warren-bank)",
   "license": "GPL-2.0",
