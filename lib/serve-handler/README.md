@@ -250,9 +250,9 @@ When a redirect is an alias for a network resource hosted by a different domain,
 
 ### cgiBin (Array)
 
-After a requested path is resolved to a real file, which may be the end result of several `rewrites`, this option enables the filepath to be used as a parameter to a command-line instruction.. and the resulting output to be returned to the client as a response.
+After a request is resolved to an absolute file path for a file that exists, which may be the end result of several [`rewrites`](#rewrites-array), this option enables the file path to be used as a parameter to a command-line instruction.. and the resulting output to be returned to the client as a response.
 
-Similar to rewrite and redirect rules, an `engine` attribute is used to determine how `source` will be matched with the absolute filepath (normalized to use a '/' directory separator on all platforms):
+Similar to rewrite and redirect rules, an `engine` attribute is used to determine how `source` will be matched with the absolute file path (normalized to use a '/' directory separator on all platforms):
 * _glob_
 * _route_
 * _regex_
@@ -260,7 +260,7 @@ Similar to rewrite and redirect rules, an `engine` attribute is used to determin
 * _text_
   - supports an optional _exact_ attribute
 
-A `command` attribute holds a string with the command-line instruction to execute. The current working directory is normalized to the directory containing the file. The special token `{{source}}` in the `command` string will be interpolated to the absolute filepath using the native directory separator and enclosed by double quotes.
+A `command` attribute holds a string with the command-line instruction to execute. The current working directory is normalized to the directory containing the file. The special token `{{source}}` in the `command` string will be interpolated to the absolute file path using the native directory separator and enclosed by double quotes.
 
 An optional `env` attribute holds an object to define environment variable key/value pairs that should exist during execution.
 
@@ -317,7 +317,7 @@ For example:
 }
 ```
 
-**NOTE:** If the absolute filepath matches `source` in more than one rule, the `command` in only the first matching rule will be executed.
+**NOTE:** If the absolute file path matches `source` in more than one rule, the `command` in only the first matching rule will be executed.
 
 ### proxyMiddleware (Array)
 
@@ -500,7 +500,7 @@ Once this property is set as shown above, all symlinks will automatically be res
 
 ### etag (Boolean)
 
-HTTP response headers will contain a strong [`ETag`][etag] response header, instead of a [`Last-Modified`][last-modified] header. Opt-in because calculating the hash value may be computationally expensive for large files.
+HTTP response headers will contain a strong [`ETag`](https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/ETag) response header, instead of a [`Last-Modified`](https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Last-Modified) header. Opt-in because calculating the hash value may be computationally expensive for large files.
 
 Sending an `ETag` header is disabled by default and can be enabled like this:
 

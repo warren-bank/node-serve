@@ -25,16 +25,16 @@ Static file serving and directory listing
   - files:
     * [config-static.js](https://github.com/vercel/schemas/blob/2.19.0/deployment/config-static.js)
   - changes:
-    * add: (boolean) `symlinks`
-    * add: (boolean) `etag`
-    * add: (object)  `auth`
+    * add: (boolean) [`symlinks`](https://github.com/warren-bank/node-serve/tree/master/lib/serve-handler#symlinks-boolean)
+    * add: (boolean) [`etag`](https://github.com/warren-bank/node-serve/tree/master/lib/serve-handler#etag-boolean)
+    * add: (object)  [`auth`](https://github.com/warren-bank/node-serve/tree/master/lib/serve-handler#auth-object)
       - restrict access using basic auth
       - attributes:
         * (string) `name`
         * (string) `pass`
-    * add: (string) `proxyCookieJar`
+    * add: (string) [`proxyCookieJar`](https://github.com/warren-bank/node-serve/tree/master/lib/serve-handler#proxycookiejar-string)
       - file path to a persistent text file used by proxied redirects to store cookie data in JSON format
-    * add: (array) `proxyMiddleware`
+    * add: (array) [`proxyMiddleware`](https://github.com/warren-bank/node-serve/tree/master/lib/serve-handler#proxymiddleware-array)
       - apply custom middleware to modify the text content in responses for proxied redirects
       - shape: array of objects
       - attributes of each object:
@@ -45,6 +45,7 @@ Static file serving and directory listing
             * _regex_
             * _text_
         * (string) `source`
+          - pattern to compare with the URL of proxied redirect requests
         * (string) `type`
           - must be one of the following values:
             * _html_
@@ -82,7 +83,7 @@ Static file serving and directory listing
             * are passed: `{response: data}`
             * where `data` is the raw text response
             * allows direct manipulation of the text response
-    * add: (array) `cgiBin`
+    * add: (array) [`cgiBin`](https://github.com/warren-bank/node-serve/tree/master/lib/serve-handler#cgibin-array)
       - execute _cgi-bin_ scripts and return _stdout_ in response
       - shape: array of objects
       - attributes of each object:
@@ -93,15 +94,34 @@ Static file serving and directory listing
             * _regex_
             * _text_
         * (string) `source`
+          - pattern to compare with the absolute file path for a file that exists and will otherwise be served
         * (string) `command`
           - the command-line instruction to execute
-            * the current working directory is normalized to the directory containing the `source` file
-            * the special token `{{source}}` in the `command` string will be interpolated to the absolute filepath using the native directory separator and enclosed by double quotes
         * (object) `env`
           - an optional key/value map for environment variables that should exist during execution
-    * add: (boolean) `logReq`
+      - usage:
+        * a `command` is only executed for a requested file path when:
+          - `source` matches the absolute file path for a file that exists and will otherwise be served
+            * this file path may be the end result of several [`rewrites`](https://github.com/warren-bank/node-serve/tree/master/lib/serve-handler#rewrites-array)
+            * this file path is normalized to use a '/' directory separator on all platforms
+            * `engine` determines the methodology that is used to match `source` with the absolute file path
+              - _glob_
+                * uses [minimatch](https://github.com/isaacs/minimatch)
+              - _route_
+                * uses [path-to-regexp](https://github.com/pillarjs/path-to-regexp)
+              - _regex_
+                * uses a standard regular expression pattern
+                * an optional (string) `flags` attribute can add regex modifiers (ex: "i")
+              - _text_
+                * uses the presence of a case-sensitive substring
+                * an optional (boolean) `exact` attribute can add the requirement that the substring must match the entire URL
+        * a `command` can be any command-line instruction that can execute and write a response to standard output
+          - the absolute file path that matches `source` can be easily embedded into this instruction using a special token
+            * all instances of the substring `{{source}}` in `command` will interpolate to the absolute file path using the native directory separator and enclosed by double quotes
+          - the current working directory is normalized to the directory that contains the `{{source}}` file
+    * add: (boolean) [`logReq`](https://github.com/warren-bank/node-serve/tree/master/lib/serve-handler#logreq-boolean)
       - print a log of all inbound requests
-    * add: (boolean) `logRes`
+    * add: (boolean) [`logRes`](https://github.com/warren-bank/node-serve/tree/master/lib/serve-handler#logres-boolean)
       - print a log of all outbound responses
 * [serve](https://github.com/vercel/serve)
   - forked from tag: [13.0.2](https://github.com/vercel/serve/releases/tag/13.0.2)
