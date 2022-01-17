@@ -1,6 +1,7 @@
 {
   "name": "@warren-bank/serve",
-  "version": "130002.10.0",
+  "type": "commonjs",
+  "version": "130002.10.1",
   "description": "Static file serving and directory listing",
   "author": "Warren Bank (https://github.com/warren-bank)",
   "license": "GPL-2.0",
@@ -29,7 +30,12 @@
     "SPA webserver",
     "SPA http server",
     "SPA https server",
-    "SPA web server"
+    "SPA web server",
+    "proxy",
+    "middleware",
+    "cgi",
+    "cgi-bin",
+    "cgi gateway"
   ],
   "scripts": {
     "postinstall": "npm install ./lib/serve-handler && npm install ./lib/serve"
