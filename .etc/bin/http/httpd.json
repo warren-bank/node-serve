@@ -146,6 +146,18 @@
 
     {
       "engine":        "regex",
+      "source":        "^/echo(/.*)?$",
+      "destination":   "https://httpbin.org/anything$1",
+      "flags":         "i",
+      "decode":        false,
+      "terminal":      true,
+      "preserveQuery": true,
+      "preserveHash":  false,
+      "proxy":         false
+    },
+
+    {
+      "engine":        "regex",
       "source":        "^/search/([^/]+)/?$",
       "destination":   "https://www.google.com/search?q=$1",
       "flags":         "",

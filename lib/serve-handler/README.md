@@ -91,7 +91,7 @@ Using absolute path:
 By default, `.html` files can only be accessed by requesting a path that includes this file extension.
 
 When this option is enabled:
-* requests that include an `.html` file extension will automatically perform a redirect with status code [301](https://en.wikipedia.org/wiki/HTTP_301) to the same path, but with the extension dropped
+* requests that include an `.html` file extension will automatically perform a redirect to the same path, but with the extension dropped
 * requests to this _clean_ path will be transparently rewritten to read from the original file path
 
 You can enable the feature like follows:
@@ -204,7 +204,11 @@ By default, rules are applied to the original request path, which may include UR
 
 **NOTE:** Reencoding of the resulting redirect URL is handled automatically.
 
-By default, redirected responses include the status code [301](https://en.wikipedia.org/wiki/HTTP_301), but this behavior can be adjusted by setting the `type` property directly on the rule object:
+By default, the [status code](https://en.wikipedia.org/wiki/List_of_HTTP_status_codes#3xx_redirection) of the response that is used to perform a redirect is conditional upon the [method](https://en.wikipedia.org/wiki/Hypertext_Transfer_Protocol#Request_methods) of the request:
+* [307](https://en.wikipedia.org/wiki/List_of_HTTP_status_codes#307) for methods: POST, PUT, and PATCH
+* [301](https://en.wikipedia.org/wiki/List_of_HTTP_status_codes#301) for all other methods
+
+This behavior can be adjusted by setting the `type` property directly on the rule object:
 
 ```json
 {
@@ -468,7 +472,7 @@ By default, the package will try to make assumptions for when to add trailing sl
 }
 ```
 
-With the above config, a request to `/test` would now result in a [301](https://en.wikipedia.org/wiki/HTTP_301) redirect to `/test/`.
+With the above config, a request to `/test` would now result in a redirect to `/test/`.
 
 ### renderSingle (Boolean)
 
