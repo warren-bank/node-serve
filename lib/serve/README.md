@@ -34,6 +34,103 @@ Finally, run this command to see a list of all available options:
 
 ```bash
 serve --help
+
+  serve - Static file serving and directory listing
+
+  USAGE
+
+    $ serve --help
+    $ serve --version
+    $ serve folder_name
+    $ serve [-l listen_uri [-l ...]] [directory]
+
+    By default, serve will listen on tcp:0.0.0.0:3000
+    and serve the current working directory on that address.
+
+    Specifying a single --listen argument will overwrite the default,
+    not supplement it.
+
+  OPTIONS
+
+    --help
+        Shows this help message
+
+    -v, --version
+        Displays the current version of serve
+
+    -l, --listen listen_uri
+        Specify a URI endpoint on which to listen (see below) -
+        more than one may be specified to listen in multiple places
+
+    -p
+        Specify custom port
+
+    -s, --single
+        Rewrite all not-found requests to `index.html`
+
+    -d, --debug
+        Show debugging information
+
+    -c, --config
+        Specify custom path to `serve.json`
+
+    -n, --no-clipboard
+        Do not copy the local address to the clipboard
+
+    -u, --no-compression
+        Do not compress files
+
+    --no-etag
+        Send `Last-Modified` header instead of `ETag`
+
+    -S, --symlinks
+        Resolve symlinks instead of showing 404 errors
+
+    -C, --cors
+        Enable CORS by adding the HTTP response header:
+          `Access-Control-Allow-Origin: *`
+
+    --no-port-switching
+        Do not automatically switch to a different port number
+        when the port specified is already in use
+
+    --ssl-cert
+        Optional path to an SSL/TLS certificate to serve with HTTPS
+
+    --ssl-key
+        Optional path to the SSL/TLS certificate's private key
+
+    --ssl-pass
+        Optional path to the SSL/TLS certificate's passphrase
+
+    --force-https listen_uri
+        Specify a URI endpoint on which to listen (see below) -
+        more than one may be specified to listen in multiple places.
+        These are insecure HTTP endpoints,
+        which redirect all requests to the first secure HTTPS endpoint
+        configured to listen on a numbered port.
+
+  ENDPOINTS
+
+    Listen endpoints (specified by the --listen, -l, or --force-https options above)
+    instruct serve to listen on one or more interfaces/ports,
+    UNIX domain sockets, or Windows named pipes.
+
+    For TCP ports on hostname "localhost":
+
+      $ serve -l 1234
+
+    For TCP (traditional host/port) endpoints:
+
+      $ serve -l tcp://hostname:1234
+
+    For UNIX domain socket endpoints:
+
+      $ serve -l unix:/path/to/socket.sock
+
+    For Windows named pipe endpoints:
+
+      $ serve -l pipe:\\.\pipe\PipeName
 ```
 
 Now you understand how the package works! :tada:
