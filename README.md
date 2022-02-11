@@ -128,6 +128,8 @@ Static file serving and directory listing
   - forked from tag: [13.0.2](https://github.com/vercel/serve/releases/tag/13.0.2)
   - changes:
     * update the `serve-handler` and `schemas` dependencies to use the modified versions (above)
+    * update the headers added to all responses when using the `--cors` command-line option
+      - permit requests that include credentials when the 'origin' header is also present
     * add: a [`reviver` function](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/JSON/parse#using_the_reviver_parameter) to reconstruct/rehydrate [`middleware`](https://github.com/warren-bank/node-serve/tree/master/lib/serve-handler#proxymiddleware-array) functions in the config object from JSON
     * add: command-line option `--force-https <listen_uri>`
       - this option is only enabled when `--ssl-cert` and `--ssl-key` are used to `--listen` on one or more secure endpoints
