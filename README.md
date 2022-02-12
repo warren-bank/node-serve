@@ -152,7 +152,7 @@ Static file serving and directory listing
         * enabled `serve` to be _manually_ configured to use any OpenSSL certificate
       - this option has been restored
         * as a shorthand way to _automatically_ configure `serve` to use the OpenSSL certificate included in both the git repo and npm package
-          - in directory: `.etc/bin/https/cert`
+          - in directory: [`.etc/bin/https/cert`](https://github.com/warren-bank/node-serve/tree/master/.etc/bin/https/cert)
   - bug fixes:
     * SSL certificates with passphrase
     * logic to resolve the [`public` option](https://github.com/warren-bank/node-serve/tree/master/lib/serve-handler#public-string) from a command-line argument
@@ -170,7 +170,9 @@ Static file serving and directory listing
     serve <options>
   ```
 * the [long version](./lib/serve/README.md#usage)
-* the easy way, using some [preconfigured scripts](https://github.com/warren-bank/node-serve/tree/master/.etc/bin)
+* the easy way:
+  - copying from [examples](./lib/serve/README.md#usage-by-example)
+  - using some [preconfigured scripts](https://github.com/warren-bank/node-serve/tree/master/.etc/bin)
 
 #### Legal:
 

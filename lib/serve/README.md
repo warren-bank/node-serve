@@ -4,33 +4,98 @@ Assuming you would like to serve a static site, single page application or just 
 
 In general, `serve` also provides a neat interface for listing directory contents, and to easily browse through a directory tree.
 
-## Usage
+## Install
 
-Get started by installing the package using [yarn](https://yarnpkg.com/lang/en/):
+Get started by installing the package using [yarn](https://yarnpkg.com/):
 
 ```sh
 yarn global add "@warren-bank/serve"
 ```
 
-You can also use [npm](https://www.npmjs.com/) instead, if you'd like:
+You can also use [npm](https://www.npmjs.com/) instead, if you'd prefer:
 
 ```sh
 npm install --global "@warren-bank/serve"
 ```
 
-Once that's done, you can run this command inside your project's directory...
+## Usage (by example)
 
-```bash
-serve
-```
+* serve the current directory
+  ```bash
+    cd /path/to/www-root
+    serve
+  ```
+  - HTTP port 3000
+    * bind to all network interfaces
 
-...or specify which folder you want to serve:
+* serve the current directory
+  ```bash
+    cd /path/to/www-root
+    serve --ssl
+  ```
+  - HTTPS port 3000
+    * bind to all network interfaces
 
-```bash
-serve folder_name
-```
+* serve the current directory
+  ```bash
+    cd /path/to/www-root
+    serve --listen 80
+  ```
+  - HTTP port 80
+    * bind to all network interfaces
 
-Finally, run this command to see a list of all available options:
+* serve the current directory
+  ```bash
+    cd /path/to/www-root
+    serve --listen tcp:localhost:80
+  ```
+  - HTTP port 80
+    * bind only to _loopback_ interface
+
+* serve the current directory
+  ```bash
+    cd /path/to/www-root
+    serve --cors --symlinks --listen 80
+  ```
+  - HTTP port 80
+    * bind to all network interfaces
+  - allow access from other websites
+  - resolve symbolic file and directory links
+
+* serve a specified directory
+  ```bash
+    serve --cors --symlinks --listen 80 /path/to/www-root
+  ```
+  - HTTP port 80
+    * bind to all network interfaces
+  - allow access from other websites
+  - resolve symbolic file and directory links
+
+* serve a specified directory
+  ```bash
+    serve --cors --symlinks --ssl --listen 443 /path/to/www-root
+  ```
+  - HTTPS port 443
+    * bind to all network interfaces
+  - allow access from other websites
+  - resolve symbolic file and directory links
+
+* serve a specified directory
+  ```bash
+    serve --cors --symlinks --ssl --listen 443 --force-https 80 /path/to/www-root
+  ```
+  - HTTPS port 443
+    * bind to all network interfaces
+  - HTTP port 80
+    * bind to all network interfaces
+    * force HTTPS
+      - redirect all requests to HTTPS port 443
+  - allow access from other websites
+  - resolve symbolic file and directory links
+
+## Usage
+
+all available options:
 
 ```bash
 serve --help
