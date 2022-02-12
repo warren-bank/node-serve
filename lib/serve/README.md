@@ -94,6 +94,10 @@ serve --help
         Do not automatically switch to a different port number
         when the port specified is already in use
 
+    --ssl
+        Enable "automatic" SSL.
+        Uses a default SSL/TLS certificate (cert/key/pass).
+
     --ssl-cert
         Optional path to an SSL/TLS certificate to serve with HTTPS
 

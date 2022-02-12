@@ -135,6 +135,24 @@ Static file serving and directory listing
       - this option is only enabled when `--ssl-cert` and `--ssl-key` are used to `--listen` on one or more secure endpoints
       - this option allows the server to also listen on one or more insecure endpoints,
         which will automatically redirect all requests to the first secure endpoint configured to listen on a numbered port
+    * add: command-line option `--ssl`
+      - this option was originally added upstream
+        * in: [commit](https://github.com/vercel/serve/commit/c6336eaf184feeda7699a541f02bed2d74eabe14)
+        * from: [pull request](https://github.com/vercel/serve/pull/274)
+        * on: Oct 17, 2017
+      - its original implementation _automatically_ included a static OpenSSL certificate
+        * published by the external dependency: [openssl-self-signed-certificate](https://github.com/neverendingqs/openssl-self-signed-certificate)
+      - this option was subsequently removed upstream
+        * in: [commit](https://github.com/vercel/serve/commit/70d957b47ffe5f1912d221039b5338c2995a6650)
+        * from: [pull request](https://github.com/vercel/serve/pull/520)
+        * on: Sep 26, 2019
+      - its updated implementation
+        * replaced the (old) `--ssl` option with (new) options: `--ssl-cert`, `--ssl-key`, and `--ssl-pass`
+        * removed the external dependency: [openssl-self-signed-certificate](https://github.com/neverendingqs/openssl-self-signed-certificate)
+        * enabled `serve` to be _manually_ configured to use any OpenSSL certificate
+      - this option has been restored
+        * as a shorthand way to _automatically_ configure `serve` to use the OpenSSL certificate included in both the git repo and npm package
+          - in directory: `.etc/bin/https/cert`
   - bug fixes:
     * SSL certificates with passphrase
     * logic to resolve the [`public` option](https://github.com/warren-bank/node-serve/tree/master/lib/serve-handler#public-string) from a command-line argument
