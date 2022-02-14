@@ -10,9 +10,10 @@
     "Accept-Encoding": "identity, gzip, deflate, br", 
     "Content-Length": "11", 
     "Content-Type": "application/x-www-form-urlencoded", 
+    "Cookie": "", 
     "Host": "httpbin.org", 
     "User-Agent": "curl/7.58.0", 
-    "X-Amzn-Trace-Id": "Root=1-61ccb210-7733ecbc672609763da96cde"
+    "X-Amzn-Trace-Id": "Root=X-XXXXXXXX-XXXXXXXXXXXXXXXXXXXXXXXX"
   }, 
   "json": null, 
   "origin": "XXX.XXX.XXX.XXX", 
@@ -28,9 +29,10 @@
     "Accept-Encoding": "identity, gzip, deflate, br", 
     "Content-Length": "11", 
     "Content-Type": "application/octet-stream", 
+    "Cookie": "", 
     "Host": "httpbin.org", 
     "User-Agent": "curl/7.58.0", 
-    "X-Amzn-Trace-Id": "Root=1-61ccb210-7afaefd578d3fc59019db4cc"
+    "X-Amzn-Trace-Id": "Root=X-XXXXXXXX-XXXXXXXXXXXXXXXXXXXXXXXX"
   }, 
   "json": null, 
   "origin": "XXX.XXX.XXX.XXX", 
@@ -46,9 +48,50 @@
     "Accept-Encoding": "identity, gzip, deflate, br", 
     "Content-Length": "958", 
     "Content-Type": "image/png", 
+    "Cookie": "", 
     "Host": "httpbin.org", 
     "User-Agent": "curl/7.58.0", 
-    "X-Amzn-Trace-Id": "Root=1-61ccb210-6fbaf38d1a4435e806e1daf5"
+    "X-Amzn-Trace-Id": "Root=X-XXXXXXXX-XXXXXXXXXXXXXXXXXXXXXXXX"
+  }, 
+  "json": null, 
+  "origin": "XXX.XXX.XXX.XXX", 
+  "url": "https://httpbin.org/post"
+}
+{
+  "args": {}, 
+  "data": "data:application/octet-stream;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAAACXBIWXMAAAsTAAALEwEAmpwYAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAANTSURBVHgBvVeNTdtAFH7vbCilUptuYFQihUhNzQQJEzSZoGSChgkIEwATNJ0AmICM4ISKWCKoHiGtVDUCn1/v2cRx4nNIcNRPgpzvnd/fvT8jLAnLsgrGVqEOQlaR0AYECwgKIRFhpNYeITkQYFeOf195njdahi8+K7hUsgzcaCPi51jgElDKdGTweOK5rgcvUYAtNl+/PVbLFuSBoDP/j3Hiec5oaQUiqzevFdGCNYAAPEkPBzpviPmNYrlsr1M4g3kxz2KxbGtoU6zb8nnoPBF7IIzyOeH8gvp/Gf2uCJUZRNRRK2e6FXnCsuxCSgEOuJTlBO3h4KZxP+jvKGbNWBFOu5AxdeO/aO9JMBwOb/vv792bJlBwNKsXWOYbeZx4jlxv4ubPlBG+2L+7c2ILLFtpPh4XslLLKtkWjGGUjHjeMzFI8fbpYYf5mPzAea5j+GjATOp4Tsg4s8B4ruPBkjDEBnuhKdgqBPyiPQSyBjlhZgS0qqZ1jgVhjGVddyCMWDC6kBP+FjgZQaxKu6wLFQU10GvQXsWlWeBrQwqaeqqoClXjP+lIciyuYE0Yuj+mWZIACrI5Da15Arssq3bngAdpQZZYpcPlApHOoIKA/wVEraFCezdhZbbX6xkCW7M7Yg94uvPGtqzCmrBbsmtaAoInKICelkY5B5EECOWhdj9AR0TNRKtCbXevkluJ4l7la1alZdlCbhmXujh4wuluuXIMOYSrlD7LonOtCbvhh71KRy0iLQlOwukW8HTSnrkuKFedEYne0HW6sEho0bbBDKqEcJgReJEYws6922s+teNpywzrtqQjuW10zYfgOs0EL4eDXkPHdLf88UJdeB2WgE9ih0t9WAd4oQSfh+yVPmjgN+77fiAaqUZC8jyTa0DZtCQLJWvSZ+JCJF+JdkIYj2ctPiRJHPALPF4p5VphXc/AIlpCuCf/ivbkeW4otdXMFsRzIfq+mohuHVgBKnNooXBlULLLpr4LeCwPyLyIA1B94QhCJyDxS2Dw7m7QP3+JAmEgo2goe2YMyvgwmfVEEsNBH1dVQGf5BNpmxAd5EuaUhJzg+FF3vp813CzshkO33+Z0UUy+w7LgohaO5tjhd5UhrbXMFtwdeXx/9py6vlU66T98qp4a9HCubgAAAABJRU5ErkJggg==", 
+  "files": {}, 
+  "form": {}, 
+  "headers": {
+    "Accept": "*/*", 
+    "Accept-Encoding": "identity, gzip, deflate, br", 
+    "Content-Length": "958", 
+    "Content-Type": "image/png", 
+    "Cookie": "", 
+    "Host": "httpbin.org", 
+    "User-Agent": "curl/7.58.0", 
+    "X-Amzn-Trace-Id": "Root=X-XXXXXXXX-XXXXXXXXXXXXXXXXXXXXXXXX", 
+    "X-Requested-With": "perl cgi"
+  }, 
+  "json": null, 
+  "origin": "XXX.XXX.XXX.XXX", 
+  "url": "https://httpbin.org/post"
+}
+{
+  "args": {}, 
+  "data": "data:application/octet-stream;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAAACXBIWXMAAAsTAAALEwEAmpwYAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAANTSURBVHgBvVeNTdtAFH7vbCilUptuYFQihUhNzQQJEzSZoGSChgkIEwATNJ0AmICM4ISKWCKoHiGtVDUCn1/v2cRx4nNIcNRPgpzvnd/fvT8jLAnLsgrGVqEOQlaR0AYECwgKIRFhpNYeITkQYFeOf195njdahi8+K7hUsgzcaCPi51jgElDKdGTweOK5rgcvUYAtNl+/PVbLFuSBoDP/j3Hiec5oaQUiqzevFdGCNYAAPEkPBzpviPmNYrlsr1M4g3kxz2KxbGtoU6zb8nnoPBF7IIzyOeH8gvp/Gf2uCJUZRNRRK2e6FXnCsuxCSgEOuJTlBO3h4KZxP+jvKGbNWBFOu5AxdeO/aO9JMBwOb/vv792bJlBwNKsXWOYbeZx4jlxv4ubPlBG+2L+7c2ILLFtpPh4XslLLKtkWjGGUjHjeMzFI8fbpYYf5mPzAea5j+GjATOp4Tsg4s8B4ruPBkjDEBnuhKdgqBPyiPQSyBjlhZgS0qqZ1jgVhjGVddyCMWDC6kBP+FjgZQaxKu6wLFQU10GvQXsWlWeBrQwqaeqqoClXjP+lIciyuYE0Yuj+mWZIACrI5Da15Arssq3bngAdpQZZYpcPlApHOoIKA/wVEraFCezdhZbbX6xkCW7M7Yg94uvPGtqzCmrBbsmtaAoInKICelkY5B5EECOWhdj9AR0TNRKtCbXevkluJ4l7la1alZdlCbhmXujh4wuluuXIMOYSrlD7LonOtCbvhh71KRy0iLQlOwukW8HTSnrkuKFedEYne0HW6sEho0bbBDKqEcJgReJEYws6922s+teNpywzrtqQjuW10zYfgOs0EL4eDXkPHdLf88UJdeB2WgE9ih0t9WAd4oQSfh+yVPmjgN+77fiAaqUZC8jyTa0DZtCQLJWvSZ+JCJF+JdkIYj2ctPiRJHPALPF4p5VphXc/AIlpCuCf/ivbkeW4otdXMFsRzIfq+mohuHVgBKnNooXBlULLLpr4LeCwPyLyIA1B94QhCJyDxS2Dw7m7QP3+JAmEgo2goe2YMyvgwmfVEEsNBH1dVQGf5BNpmxAd5EuaUhJzg+FF3vp813CzshkO33+Z0UUy+w7LgohaO5tjhd5UhrbXMFtwdeXx/9py6vlU66T98qp4a9HCubgAAAABJRU5ErkJggg==", 
+  "files": {}, 
+  "form": {}, 
+  "headers": {
+    "Accept": "*/*", 
+    "Accept-Encoding": "identity, gzip, deflate, br", 
+    "Content-Length": "958", 
+    "Content-Type": "image/png", 
+    "Cookie": "", 
+    "Host": "httpbin.org", 
+    "User-Agent": "curl/7.58.0", 
+    "X-Amzn-Trace-Id": "Root=X-XXXXXXXX-XXXXXXXXXXXXXXXXXXXXXXXX", 
+    "X-Requested-With": "bash cgi"
   }, 
   "json": null, 
   "origin": "XXX.XXX.XXX.XXX", 

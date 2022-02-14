@@ -1,1 +1,1 @@
-echo $(</dev/stdin)
+cat <&0
