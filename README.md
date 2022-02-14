@@ -116,9 +116,22 @@ Static file serving and directory listing
                 * uses the presence of a case-sensitive substring
                 * an optional (boolean) `exact` attribute can add the requirement that the substring must match the entire URL
         * a `command` can be any command-line instruction that can execute and write a response to standard output
-          - the absolute file path that matches `source` can be easily embedded into this instruction using a special token
-            * all instances of the substring `{{source}}` in `command` will interpolate to the absolute file path using the native directory separator and enclosed by double quotes
-          - the current working directory is normalized to the directory that contains the `{{source}}` file
+          - the current working directory is normalized to the directory that contains the file that matches `source`
+          - the following are special tokens that can be used in a `command` with values that are dynamically interpolated at runtime:
+            * `{{source}}`
+              - the absolute file path that matches `source`
+                * enclosed by double quotes
+                * using the native directory separator
+            * `{{www-root}}`
+              - the absolute directory path for the root of the web server
+                * using the native directory separator
+            * `{{req-url}}`
+              - the URL requested by the client from the server
+                * enclosed by double quotes
+                * does not include:
+                  - protocol, hostname, port
+                * does include:
+                  - pathname, search (querystring)
     * add: (boolean) [`logReq`](https://github.com/warren-bank/node-serve/tree/master/lib/serve-handler#logreq-boolean)
       - print a log of all inbound requests
     * add: (boolean) [`logRes`](https://github.com/warren-bank/node-serve/tree/master/lib/serve-handler#logres-boolean)

@@ -27,6 +27,15 @@
           "value": "text/html"
         }
       ]
+    },
+    {
+      "source":  "**/jsonp/**/*.+(json|js)",
+      "headers": [
+        {
+          "key":   "Content-Type",
+          "value": "application/javascript"
+        }
+      ]
     }
   ],
 
@@ -230,6 +239,11 @@
       "engine":        "glob",
       "source":        "**/cgi-bin/**/*.bat",
       "command":       "cmd.exe /c {{source}}"
+    },
+    {
+      "engine":        "glob",
+      "source":        "**/jsonp/**/*.+(json|js)",
+      "command":       "perl \"{{www-root}}/cgi-bin/jsonp/jsonp.pl\" {{source}} {{req-url}}"
     }
   ]
 }
