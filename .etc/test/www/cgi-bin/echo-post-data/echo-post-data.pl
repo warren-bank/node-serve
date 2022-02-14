@@ -1,3 +1,1 @@
-while (<>) {
-  print $_;
-}
+print <STDIN>;
