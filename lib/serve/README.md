@@ -123,11 +123,11 @@ serve --help
     -v, --version
         Displays the current version of serve
 
-    -l, --listen listen_uri
+    -l, --listen <listen_uri>
         Specify a URI endpoint on which to listen (see below) -
         more than one may be specified to listen in multiple places
 
-    -p
+    -p <port_number>
         Specify custom port
 
     -s, --single
@@ -136,7 +136,7 @@ serve --help
     -d, --debug
         Show debugging information
 
-    -c, --config
+    -c, --config <file_path>
         Specify custom path to `serve.json`
 
     -n, --no-clipboard
@@ -163,21 +163,25 @@ serve --help
         Enable "automatic" SSL.
         Uses a default SSL/TLS certificate (cert/key/pass).
 
-    --ssl-cert
+    --ssl-cert <file_path>
         Optional path to an SSL/TLS certificate to serve with HTTPS
 
-    --ssl-key
+    --ssl-key <file_path>
         Optional path to the SSL/TLS certificate's private key
 
-    --ssl-pass
+    --ssl-pass <file_path>
         Optional path to the SSL/TLS certificate's passphrase
 
-    --force-https listen_uri
+    --force-https <listen_uri>
         Specify a URI endpoint on which to listen (see below) -
         more than one may be specified to listen in multiple places.
         These are insecure HTTP endpoints,
         which redirect all requests to the first secure HTTPS endpoint
         configured to listen on a numbered port.
+
+    --delay <ms>
+        Specify a delay in milliseconds,
+        which is applied to all requests to simulate network latency
 
   ENDPOINTS
 

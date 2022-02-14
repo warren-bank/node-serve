@@ -166,6 +166,8 @@ Static file serving and directory listing
       - this option has been restored
         * as a shorthand way to _automatically_ configure `serve` to use the OpenSSL certificate included in both the git repo and npm package
           - in directory: [`.etc/bin/https/cert`](https://github.com/warren-bank/node-serve/tree/master/.etc/bin/https/cert)
+    * add: command-line option `--delay`
+      - this option allows the user to specify a delay in milliseconds, which is applied to all requests to simulate network latency
   - bug fixes:
     * SSL certificates with passphrase
     * logic to resolve the [`public` option](https://github.com/warren-bank/node-serve/tree/master/lib/serve-handler#public-string) from a command-line argument
