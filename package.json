@@ -1,7 +1,7 @@
 {
   "name": "@warren-bank/serve",
   "type": "commonjs",
-  "version": "130002.15.0",
+  "version": "130002.16.0",
   "description": "Static file serving and directory listing",
   "author": "Warren Bank (https://github.com/warren-bank)",
   "license": "GPL-2.0",
@@ -42,11 +42,6 @@
   },
   "bin": {
     "serve": "./lib/serve/bin/serve.js"
-  },
-  "dependencies": {
-    "serve-handler": "file:./lib/serve-handler",
-    "schemas":       "file:./lib/schemas",
-    "serve":         "file:./lib/serve"
   },
   "repository": {
     "type": "git",

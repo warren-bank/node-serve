@@ -11,13 +11,7 @@
     "micro",
     "http-server"
   ],
-  "bin": {
-    "serve": "./bin/serve.js"
-  },
   "dependencies": {
-    "serve-handler": "file:../serve-handler",
-    "schemas":       "file:../schemas",
-
     "ajv": "8.8.2",
     "arg": "5.0.1",
     "boxen": "5.1.2",
