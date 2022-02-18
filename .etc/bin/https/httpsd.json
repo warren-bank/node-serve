@@ -36,6 +36,15 @@
           "value": "application/javascript"
         }
       ]
+    },
+    {
+      "source":  "**/foo/**/*[^\u0000-\u007F]*.txt",
+      "headers": [
+        {
+          "key":   "Content-Disposition",
+          "value": "attachment; filename=\"unicode.txt\""
+        }
+      ]
     }
   ],
 

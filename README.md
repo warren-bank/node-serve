@@ -169,8 +169,12 @@ Static file serving and directory listing
     * add: command-line option `--delay`
       - this option allows the user to specify a delay in milliseconds, which is applied to all requests to simulate network latency
   - bug fixes:
-    * SSL certificates with passphrase
-    * logic to resolve the [`public` option](https://github.com/warren-bank/node-serve/tree/master/lib/serve-handler#public-string) from a command-line argument
+    * config option [`public`](https://github.com/warren-bank/node-serve/tree/master/lib/serve-handler#public-string)
+      - correct the logic to resolve this path relative to the absolute directory path for the root of the web server
+    * command-line option `--ssl-pass`
+      - read the file containing the SSL certificate passphrase as a _String_ rather than a _Buffer_
+    * command-line option `--single`
+      - only redirect requests that would otherwise return a _404_ status code
 
 #### Install:
 

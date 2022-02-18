@@ -3,42 +3,96 @@
   <title>test</title>
   <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico" />
   <style>
-    body, a {font-size: 18px;}
-    h4      {font-size: 1.15em;}
-    a       {text-decoration: none;}
-    li      {line-height: 1.5em}
+    body, a  {font-size: 18px;}
+    h4       {font-size: 1.15em;}
+    a        {text-decoration: none;}
+    li       {line-height: 1.5em}
+    textarea {display: block; width: 40em; height: 5em;}
   </style>
 </head>
 <body>
   <p>
     <h4>3x routes to access the same file:</h4>
     <ol>
-      <li><a href="foo/bar/ba%23z/test.txt">direct</a></li>
-      <li><a href="IGNORE_IMPLICIT/foo/bar/ba%23z/test.txt">rewrite</a></li>
-      <li><a href="IGNORE_EXPLICIT/foo/bar/ba%23z/test.txt">redirect</a></li>
+      <li><a href="foo/bar/baz/test.txt">direct</a></li>
+      <li><a href="IGNORE_IMPLICIT/foo/bar/baz/test.txt">rewrite</a></li>
+      <li><a href="IGNORE_EXPLICIT/foo/bar/baz/test.txt">redirect</a></li>
     </ol>
   </p>
   <p>
     <h4>2x redirects to reach a directory listing w/ querystring data extracted from path:</h4>
     <ul>
-      <li><a href="IGNORE_EXPLICIT/foo/bar/ba%23z/index.html">redirect</a></li>
+      <li><a href="IGNORE_EXPLICIT/foo/bar/baz/index.html">redirect</a></li>
     </ul>
   </p>
   <p>
     <h4>redirects to load a remote URL w/ proxy:</h4>
     <ul>
-      <li><a href="/whoami/">https://httpbin.org/ip</a></li>
-      <li><a href="/search/hello+world/">https://www.google.com/search?q=hello+world</a> w/ middleware to rewrite HTML DOM</li>
+      <li>
+        <a href="/whoami/">https://httpbin.org/ip</a>
+        <ul>
+          <li>w/ middleware to inject additional key/value pairs to JSON response Object</li>
+        </ul>
+      </li>
+      <li>
+        <a href="/search/hello+world/">https://www.google.com/search?q=hello+world</a>
+        <ul>
+          <li>w/ middleware to modify HTML response DOM</li>
+        </ul>
+      </li>
     </ul>
   </p>
   <p>
+    <h4>download text files having a non-ascii filename:</h4>
+    <ol>
+      <li><a href="foo/@bar/ba%23z/20xx%E5%B9%B410%E6%9C%8824%E6%97%A5/2020%E5%B9%B410%E6%9C%8824%E6%97%A5.txt">2020年10月24日.txt</a></li>
+    </ol>
+  </p>
+  <p>
     <h4>cgi-bin:</h4>
-    <ul>
-      <li><a href="cgi-bin/hello-world.php">print stdout as HTML from executing a PHP script</a></li>
-      <li><a href="cgi-bin/hello-world.pl">print stdout as TEXT from executing a Perl script</a></li>
-      <li><a href="cgi-bin/hello-world.sh">print stdout as TEXT from executing a Bash shell script</a></li>
-      <li><a href="cgi-bin/hello-world.bat">print stdout as TEXT from executing a Windows .bat shell script</a></li>
-    </ul>
+    <ol>
+      <li>
+        <i>hello world</i>:
+        <ul>
+          <li><a href="cgi-bin/hello-world/hello-world.php">print stdout as HTML from executing a PHP script</a></li>
+          <li><a href="cgi-bin/hello-world/hello-world.pl">print stdout as TEXT from executing a Perl script</a></li>
+          <li><a href="cgi-bin/hello-world/hello-world.sh">print stdout as TEXT from executing a Bash shell script</a></li>
+          <li><a href="cgi-bin/hello-world/hello-world.bat">print stdout as TEXT from executing a Windows .bat shell script</a></li>
+        </ul>
+      </li>
+      <li>
+        echo POST data:
+        <ul>
+          <li>
+            embed stdin in HTML printed to stdout by executing a PHP script:
+            <form action="cgi-bin/echo-post-data/echo-post-data.php" method="POST">
+              <textarea name="text"></textarea>
+              <input type="submit" />
+            </form>
+          </li>
+          <li>
+            pipe stdin to stdout, through a Perl script:
+            <form action="cgi-bin/echo-post-data/echo-post-data.pl" method="POST">
+              <textarea name="text"></textarea>
+              <input type="submit" />
+            </form>
+          </li>
+          <li>
+            pipe stdin to stdout, through a Bash shell script:
+            <form action="cgi-bin/echo-post-data/echo-post-data.sh" method="POST">
+              <textarea name="text"></textarea>
+              <input type="submit" />
+            </form>
+          </li>
+        </ul>
+      </li>
+      <li>
+        jsonp:
+        <ul>
+          <li><a href="jsonp/data.json?callback=cb">return content of requested JSON file as the parameter to a Javascript callback function</a></li>
+        </ul>
+      </li>
+    </ol>
   </p>
 </body>
 </html>
