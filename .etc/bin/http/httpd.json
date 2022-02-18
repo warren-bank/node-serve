@@ -45,6 +45,15 @@
           "value": "attachment; filename=\"unicode.txt\""
         }
       ]
+    },
+    {
+      "source":  "**/foo/**/test.txt",
+      "headers": [
+        {
+          "key":   "Content-Disposition",
+          "value": null
+        }
+      ]
     }
   ],
 
