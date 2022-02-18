@@ -50,8 +50,16 @@
       "source":  "**/foo/**/test.txt",
       "headers": [
         {
-          "key":   "Content-Disposition",
+          "key":   "ETag",
           "value": null
+        },
+        {
+          "key":   "Cache-Control",
+          "value": "must-revalidate"
+        },
+        {
+          "key":   "Expires",
+          "value": "-1"
         }
       ]
     }
