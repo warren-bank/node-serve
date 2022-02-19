@@ -137,6 +137,8 @@ Static file serving and directory listing
     * add: (boolean) [`logRes`](https://github.com/warren-bank/node-serve/tree/master/lib/serve-handler#logres-boolean)
       - print a log of all outbound responses
     * remove: regex patterns to restrict the set of characters permitted in `key` and `value` attributes of each [header](https://github.com/warren-bank/node-serve/tree/master/lib/serve-handler#headers-array)
+    * modify: update the `value` attribute of each [header](https://github.com/warren-bank/node-serve/tree/master/lib/serve-handler#headers-array) to permit `null`
+      - `null` value is used to remove a specific response header from matching requests
 * [serve](https://github.com/vercel/serve)
   - forked from tag: [13.0.2](https://github.com/vercel/serve/releases/tag/13.0.2)
   - changes:
@@ -168,9 +170,16 @@ Static file serving and directory listing
           - in directory: [`.etc/bin/https/cert`](https://github.com/warren-bank/node-serve/tree/master/.etc/bin/https/cert)
     * add: command-line option `--delay`
       - this option allows the user to specify a delay in milliseconds, which is applied to all requests to simulate network latency
+  - optimizations:
+    * prevent unnecessary calculation of etag hash
+    * prevent unnecessary determination of mime-type
   - bug fixes:
     * config option [`public`](https://github.com/warren-bank/node-serve/tree/master/lib/serve-handler#public-string)
-      - correct the logic to resolve this path relative to the absolute directory path for the root of the web server
+      - resolve directory path relative to the root of the web server
+        * which is determined by a command-line argument,<br>and resolved relative to the current working directory
+    * command-line option `--config`
+      - resolve file path relative to the current working directory,<br>rather than the root of the web server
+      - exit with error code when file path is invalid
     * command-line option `--ssl-pass`
       - read the file containing the SSL certificate passphrase as a _String_ rather than a _Buffer_
     * command-line option `--single`
