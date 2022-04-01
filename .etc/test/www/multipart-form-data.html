@@ -1,0 +1,45 @@
+<html>
+<head>
+  <title>multipart/form-data</title>
+  <style>
+    h2,h3,h4 {display: block; margin: 0}
+    h3, p, select, input[type="file"], input[type="submit"] {display: block; margin-top: 1em}
+  </style>
+</head>
+<body>
+  <h2>Inspect: <i>multipart/form-data</i></h2>
+  <h4>via: <i>/cgi-bin/echo-post-data/echo-post-data.php</i></h4>
+
+  <hr />
+
+  <form method="POST" enctype="multipart/form-data" action="/cgi-bin/echo-post-data/echo-post-data.php">
+    <input type="hidden" name="hidden1" value="Hello, World!" />
+
+    <h3>Select Options:</h3>
+    <select name="select1" id="cars" multiple>
+      <option value="Foo">Foo</option>
+      <option value="Bar">Bar</option>
+      <option value="Baz">Baz</option>
+    </select>
+
+    <h3>Radio Buttons:</h3>
+    <input type="radio" name="radio1" value="Foo" /> Foo
+    <input type="radio" name="radio1" value="Bar" /> Bar
+    <input type="radio" name="radio1" value="Baz" /> Baz
+
+    <h3>Checkboxes:</h3>
+    <input type="checkbox" name="checkbox1" value="Foo" /> Foo
+    <input type="checkbox" name="checkbox1" value="Bar" /> Bar
+    <input type="checkbox" name="checkbox1" value="Baz" /> Baz
+
+    <h3>File Uploads:</h3>
+    <input name="file1"  type="file" />
+    <input name="files2" type="file" multiple />
+
+    <hr />
+
+    <input type="submit" value="Submit" />
+  </form>
+
+</body>
+</html>
