@@ -336,7 +336,7 @@ Similar to rewrite and redirect rules, an `engine` attribute is used to determin
   - supports an optional _exact_ attribute
 
 The format of the text in a response will determine which `middleware` functions will be called to apply modifications,
-as well as the format of the singular parameter passed to the `middleware` functions.
+as well as the format of the first parameter passed to the `middleware` functions.
 
 For simplicity, _content-types_ that represent the same text format are grouped together and given a name.
 The following groups are currently supported:
@@ -349,7 +349,14 @@ For any `middleware` function to be called:
 * the URL of the redirected request must match `source` using `engine`
 * the name of the group for the _content-type_ of the proxied response must match `type`
 
-If called, then the format of the singular parameter (ex: `param`) passed to the `middleware` function is determined by `type` as follows:
+If called, then the `middleware` function is passed the following list of parameters:
+1. `param`
+2. `proxy_url`
+   - the full proxied URL,<br>which returned the response that is wrapped by `param`
+3. `original_url_path`
+   - the original URL path,<br>which was internally redirected to the full proxied URL
+
+The format of the first parameter (ex: `param`) passed to the `middleware` function is determined by `type` as follows:
 * _html_
   - an instance of [cheerio](https://github.com/cheeriojs/cheerio) to enable direct manipulation of DOM elements
 * _json_
@@ -368,21 +375,21 @@ For example:
       "engine":        "text",
       "source":        "https://www.google.com/search?q=",
       "type":          "html",
-      "middleware":    "function($) { const results = $('#search'); $('body').empty().append(results); $('div[jscontroller], h2, script, style').remove(); }",
+      "middleware":    "function($, proxy_url, original_url_path) { const results = $('#search'); $('body').empty().append(results); $('div[jscontroller], h2, script, style').remove(); }",
       "terminal":      true
     },
     {
       "engine":        "text",
       "source":        "https://httpbin.org/ip",
       "type":          "json",
-      "middleware":    "function(data) { if (data.response instanceof Object) Object.assign(data.response, {hello: 'world'}); }",
+      "middleware":    "function(data, proxy_url, original_url_path) { if (data.response instanceof Object) Object.assign(data.response, {hello: 'world'}); }",
       "terminal":      true
     }
   ]
 }
 ```
 
-**NOTE:** All `middleware` functions that match a particular proxied request/response are called sequentially in the same order that the rules are defined. The same singular parameter is passed by reference to all, and changes to its value accumulate. Any rule can prevent further modification by adding the attribute: `{"terminal": true}`
+**NOTE:** All `middleware` functions that match a particular proxied request/response are called sequentially in the same order that the rules are defined. The same first parameter is passed by reference to all, and changes to its value accumulate. Any rule can prevent further modification by adding the attribute: `{"terminal": true}`
 
 **NOTE:** [`serve`](https://github.com/warren-bank/node-serve/tree/master/lib/serve) reads its config object from a text file containing JSON, which is validated against a schema and then parsed. Since a function isn't a valid JSON data type, `middleware` values need to be converted to string (using [`Function.prototype.toString()`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Function/toString)); the [`stringify-middleware` utility](https://github.com/warren-bank/node-serve/tree/master/.etc/util) simplifies this task.
 
