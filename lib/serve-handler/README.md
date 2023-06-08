@@ -433,6 +433,8 @@ If you set a header `value` to `null` it removes any previous defined header wit
 
 **NOTE:** The paths can only contain globs that are matched using [minimatch](https://github.com/isaacs/minimatch).
 
+**NOTE:** The paths are matched by comparing the `source` pattern to the relative file path _after_ [`rewrites`](#rewrites-array).
+
 ### directoryListing (Boolean|Array)
 
 For paths are not files, but directories, the package will automatically render a good-looking list of all the files and directories contained inside that directory.
