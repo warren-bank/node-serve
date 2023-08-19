@@ -132,6 +132,13 @@ Static file serving and directory listing
                   - protocol, hostname, port
                 * does include:
                   - pathname, search (querystring)
+          - the following are special tokens that can be used in `env` values that are dynamically interpolated at runtime:
+            * `{{serve-root}}`
+              - the absolute directory path for the root of the `@warren-bank/serve` package
+                * using the native directory separator
+            * `{{www-root}}`
+              - the absolute directory path for the root of the web server
+                * using the native directory separator
     * add: (boolean) [`logReq`](https://github.com/warren-bank/node-serve/tree/master/lib/serve-handler#logreq-boolean)
       - print a log of all inbound requests
     * add: (boolean) [`logRes`](https://github.com/warren-bank/node-serve/tree/master/lib/serve-handler#logres-boolean)
