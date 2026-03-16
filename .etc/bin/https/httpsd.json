@@ -11,7 +11,7 @@
 
   "headers": [
     {
-      "source":  "**/cgi-bin/**/*.+(pl|sh|bat)",
+      "source":  "**/cgi-bin/**/*.+(js|pl|sh|bat)",
       "headers": [
         {
           "key":   "Content-Type",
@@ -245,6 +245,12 @@
   "cgiBin": [
     {
       "engine":        "glob",
+      "source":        "**/cgi-bin/**/*.js",
+      "command":       "node {{source}}",
+      "env":           { "PATH": "C:/PortableApps/node.js/20.2.0", "NODE_SKIP_PLATFORM_CHECK": "1" }
+    },
+    {
+      "engine":        "glob",
       "source":        "**/cgi-bin/**/*.pl",
       "command":       "perl {{source}}",
       "env":           { "PATH": "C:/PortableApps/perl/5.10.1" }
@@ -269,7 +275,8 @@
     {
       "engine":        "glob",
       "source":        "**/jsonp/**/*.+(json|js)",
-      "command":       "perl \"{{www-root}}/cgi-bin/jsonp/jsonp.pl\" {{source}} {{req-url}}"
+      "command":       "perl \"{{www-root}}/cgi-bin/jsonp/jsonp.pl\" {{source}} {{req-url}}",
+      "env":           { "PATH": "C:/PortableApps/perl/5.10.1" }
     }
   ]
 }

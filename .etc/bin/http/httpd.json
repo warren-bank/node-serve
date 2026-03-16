@@ -275,7 +275,8 @@
     {
       "engine":        "glob",
       "source":        "**/jsonp/**/*.+(json|js)",
-      "command":       "perl \"{{www-root}}/cgi-bin/jsonp/jsonp.pl\" {{source}} {{req-url}}"
+      "command":       "perl \"{{www-root}}/cgi-bin/jsonp/jsonp.pl\" {{source}} {{req-url}}",
+      "env":           { "PATH": "C:/PortableApps/perl/5.10.1" }
     }
   ]
 }
