@@ -181,7 +181,7 @@
     {
       "engine":        "regex",
       "source":        "^/search/([^/]+)/?$",
-      "destination":   "https://www.google.com/search?q=$1",
+      "destination":   "https://www.bing.com/search?q=$1",
       "flags":         "",
       "decode":        false,
       "terminal":      true,
@@ -228,9 +228,9 @@
   "proxyMiddleware": [
     {
       "engine":        "text",
-      "source":        "https://www.google.com/search?q=",
+      "source":        "https://www.bing.com/search?q=",
       "type":          "html",
-      "middleware":    "function($) { const results = $('#search'); $('body').empty().append(results); $('div[jscontroller], h2, script, style').remove(); }",
+      "middleware":    "function($) { const results = $('ol#b_results'); $('body').empty().append(results); $('ol#b_results > li.b_algoBigWiki, ol#b_results > li.b_ans, ol#b_results > li.b_pag, div.siteicon, script, style, link[rel=\"stylesheet\"]').remove(); }",
       "terminal":      true
     },
     {

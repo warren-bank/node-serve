@@ -1,6 +1,7 @@
+<!DOCTYPE html>
 <html>
 <head>
-  <title>test</title>
+  <title>Assorted Tests</title>
   <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico" />
   <style>
     body, a  {font-size: 18px;}
@@ -35,7 +36,7 @@
         </ul>
       </li>
       <li>
-        <a href="/search/hello+world/">https://www.google.com/search?q=hello+world</a>
+        <a href="/search/hello+world/">https://www.bing.com/search?q=hello+world</a>
         <ul>
           <li>w/ middleware to modify HTML response DOM</li>
         </ul>
@@ -55,6 +56,7 @@
         <i>hello world</i>:
         <ul>
           <li><a href="cgi-bin/hello-world/hello-world.php">print stdout as HTML from executing a PHP script</a></li>
+          <li><a href="cgi-bin/hello-world/hello-world.js">print stdout as TEXT from executing a Node.js script</a></li>
           <li><a href="cgi-bin/hello-world/hello-world.pl">print stdout as TEXT from executing a Perl script</a></li>
           <li><a href="cgi-bin/hello-world/hello-world.sh">print stdout as TEXT from executing a Bash shell script</a></li>
           <li><a href="cgi-bin/hello-world/hello-world.bat">print stdout as TEXT from executing a Windows .bat shell script</a></li>
@@ -66,6 +68,13 @@
           <li>
             embed stdin in HTML printed to stdout by executing a PHP script:
             <form action="cgi-bin/echo-post-data/echo-post-data.php" method="POST">
+              <textarea name="text"></textarea>
+              <input type="submit" />
+            </form>
+          </li>
+          <li>
+            pipe stdin to stdout, through a Node.js script:
+            <form action="cgi-bin/echo-post-data/echo-post-data.js" method="POST">
               <textarea name="text"></textarea>
               <input type="submit" />
             </form>

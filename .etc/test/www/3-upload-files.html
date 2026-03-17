@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Upload Files</title>
+  <style>
+    h2,h3,h4,pre {display: block; margin: 0}
+    h3, input[type="file"], input[type="submit"] {display: block; margin-top: 1em}
+    hr {margin: 1em 0}
+    iframe#output_frame {width: 100%; height: 50%; border-style: none}
+  </style>
+</head>
+<body>
+  <h2>Upload files to: <a target="_blank" href="uploads/"><i>uploads/</i></a></h2>
+  <h4>via: <i>cgi-bin/upload-files/upload-files.js</i></h4>
+
+  <h3>Requirements:</h3>
+  <pre>cd "cgi-bin/upload-files" && npm install</pre>
+
+  <hr />
+
+  <form method="POST" enctype="multipart/form-data" action="cgi-bin/upload-files/upload-files.js" target="output_frame">
+    <h3>File to Upload:</h3>
+    <input name="files[]" type="file" multiple required />
+
+    <br />
+    <input type="submit" value="Upload Files" />
+  </form>
+
+  <iframe name="output_frame" id="output_frame"></iframe>
+</body>
+</html>

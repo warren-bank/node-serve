@@ -10,6 +10,7 @@ curl --silent --insecure -X POST "%serve_url%/post/" -H "content-type: applicati
 curl --silent --insecure -X POST "%serve_url%/post/" -H "content-type: application/octet-stream" --data-binary "hello=world"
 
 curl --silent --insecure "https://github.githubassets.com/favicons/favicon.png" |                                                                                                            curl --silent --insecure -X POST "%serve_url%/post/" -H "content-type: image/png"                                 --data-binary @-
+curl --silent --insecure "https://github.githubassets.com/favicons/favicon.png" | curl --silent --insecure -X POST "%serve_url%/cgi-bin/echo-post-data/echo-post-data.js" --data-binary @- | curl --silent --insecure -X POST "%serve_url%/post/" -H "content-type: image/png" -H "x-requested-with: node cgi" --data-binary @-
 curl --silent --insecure "https://github.githubassets.com/favicons/favicon.png" | curl --silent --insecure -X POST "%serve_url%/cgi-bin/echo-post-data/echo-post-data.pl" --data-binary @- | curl --silent --insecure -X POST "%serve_url%/post/" -H "content-type: image/png" -H "x-requested-with: perl cgi" --data-binary @-
 curl --silent --insecure "https://github.githubassets.com/favicons/favicon.png" | curl --silent --insecure -X POST "%serve_url%/cgi-bin/echo-post-data/echo-post-data.sh" --data-binary @- | curl --silent --insecure -X POST "%serve_url%/post/" -H "content-type: image/png" -H "x-requested-with: bash cgi" --data-binary @-
 
